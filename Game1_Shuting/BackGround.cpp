@@ -4,7 +4,7 @@
 static int m_Image01;
 
 void BackGroundInitialize() {
-	m_Image01 = LoadGraph("/makes/mt/îwåi01.png");
+	m_Image01 = LoadGraph("../material/picture/îwåi01.png");
 }
 
 void BackGroundDraw() {

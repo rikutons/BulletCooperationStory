@@ -12,8 +12,8 @@ int PlayerSpeed;
 
 
 void PlayerInitialize() {
-	m_Image01 = LoadGraph("/makes/mt/自機01.png");
-	m_Image02 = LoadGraph("/makes/mt/ファンネル01.png");
+	m_Image01 = LoadGraph("../material/picture/自機01.png");
+	m_Image02 = LoadGraph("../material/picture/ファンネル01.png");
 	cx = InitialX;
 	cy = InitialY;
 	m_Image2angle=0;
@@ -21,7 +21,7 @@ void PlayerInitialize() {
 
 void PlayerUpdate() {
 	if (KeybordGet(KEY_INPUT_LSHIFT)>0) {
-		PlayerSpeed = 1;
+		PlayerSpeed = 3;
 	}
 	else {
 		PlayerSpeed = 5;

@@ -8,7 +8,7 @@
 static int BulletImage[16];
 
 void BulletInitialize() {
-	LoadDivGraph("/makes/mt/•¡”‰~Œ`’e01.png", 16, 4, 4, 200, 200, BulletImage);
+	LoadDivGraph("../material/picture/•¡”‰~Œ`’e01.png", 16, 4, 4, 200, 200, BulletImage);
 }
 
 //’e‚ÌŠî’êƒNƒ‰ƒX

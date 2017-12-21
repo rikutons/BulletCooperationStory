@@ -19,8 +19,8 @@ void Menu::Initialize() {
 	menu[2] = { 100,250,"オプション" };
 	menu[3] = { 100,350,"操作方法" };
 	menu[4] = { 100,450,"終了" };
-	SE_Select = LoadSoundMem("/makes/mt/yoshisuke/選択音.ogg");
-	SE_Decision=LoadSoundMem("/makes/mt/yoshisuke/決定音.ogg");
+	SE_Select = LoadSoundMem("../material/se/選択音.ogg");
+	SE_Decision=LoadSoundMem("../material/se/決定音.ogg");
 }
 
 void Menu::Update() {

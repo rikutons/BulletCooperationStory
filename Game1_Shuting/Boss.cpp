@@ -4,7 +4,7 @@
 static int m_Image;
 
 void BossInitialize(){
-	m_Image = LoadGraph("/makes/mt/ボス01.png");
+	m_Image = LoadGraph("../material/picture/ボス01.png");
 }
 
 void BossUpdate() {
