@@ -8,7 +8,8 @@ public:
 	char MenuName[30];
 };
 class Menu:public BaseScene {
-	void Initialize();
+public:
+	Menu();
 	void Update();
 	void Draw();
 };

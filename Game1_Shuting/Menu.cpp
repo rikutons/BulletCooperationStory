@@ -11,7 +11,7 @@ static int SE_Select, SE_Decision;
 MenuDeta menu[5];
 
 
-void Menu::Initialize() {
+Menu::Menu() {
 	Menupoint = 0;
 	TextTemplate = CreateFontToHandle(NULL, 10, -1, -1);
 	menu[0] = { 100, 50,"ƒƒCƒ“ƒ‚[ƒh" };

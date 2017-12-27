@@ -1,4 +1,3 @@
-#include <string>
 #include "dxlib.h"
 #include "Game.h"
 #include "Menu.h"
@@ -8,22 +7,16 @@
 
 using namespace std;
 
-BaseScene *Scene=new Menu;
+BaseScene *Scene=new Menu();
 
-eScene nowscene;
-
-void SceneMgrInitialize() {
-	nowscene = eMenu;
-	Scene->Initialize();
-}
+eScene nowscene=eMenu;
 
 bool SceneMgrUpdate()
 {
 	bool end=false;
 	if (nowscene!=eNoneScene) {
 		InitGraph();	//メモリの圧迫を防ぐために、画像をすべて開放しておく。
-		Scene->Finalize();
-		WaitTimer(500);//シーンが変わったとき、0.5秒止めることで、シーンが一瞬で変わってプレイヤーが混乱することを防ぐ。
+		WaitTimer(500); //シーンが変わったとき、0.5秒止めることで、シーンが一瞬で変わってプレイヤーが混乱することを防ぐ。
 		delete Scene;
 		switch (nowscene) {
 		case eMenu:
@@ -39,7 +32,6 @@ bool SceneMgrUpdate()
 		default:
 			break;
 		}
-		Scene->Initialize();
 		nowscene = eNoneScene;
 	}
 	Scene->Update();
@@ -50,11 +42,7 @@ void SceneMgrDraw() {
 	Scene->Draw();
 }
 
-void SceneMgrFinalize() {
-	Scene->Finalize();
-}
 
-
-void SetScene (eScene a){
-	nowscene = a;
+void SetScene (eScene next){
+	nowscene = next;
 };

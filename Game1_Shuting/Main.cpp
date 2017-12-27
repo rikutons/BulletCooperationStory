@@ -22,15 +22,12 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	DxLib_Init();
 
 
-	SceneMgrInitialize();
-
 	bool EndFlag = false;
 
 	while (ScreenFlip() == 0 && ProcessMessage() == 0 && ClearDrawScreen() == 0 && KeybordUpdate() == 0 && !EndFlag) {
 		SceneMgrUpdate();
 		SceneMgrDraw();
 	}
-	SceneMgrFinalize();
 
 
 	DxLib_End();

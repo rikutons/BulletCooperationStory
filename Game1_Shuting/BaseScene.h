@@ -11,8 +11,6 @@ protected:
 public:
 	BaseScene(* changer);
 	virtual ~BaseScene() {}
-	virtual void Initialize() {}   
-	virtual void Finalize() {}     
 	virtual void Update() {}       
 	virtual void Draw() {}         
 

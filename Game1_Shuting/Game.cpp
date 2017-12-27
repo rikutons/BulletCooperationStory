@@ -10,7 +10,7 @@
 
 static int Gameoverflag;
 
-void Game::Initialize() {
+Game::Game(){
 	BackGroundInitialize();
 	PlayerInitialize();
 	BossInitialize();
@@ -40,7 +40,7 @@ void Game::Draw() {
 	}
 }
 
-void Game::Finalize() {
+Game::~Game() {
 	BulletMgrFinalize();
 }
 

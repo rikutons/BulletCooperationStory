@@ -1,9 +1,10 @@
 #pragma once
 #include "BaseScene.h"
 class Game:public BaseScene {
-	void Initialize();
+public:
+	Game();
 	void Update();
 	void Draw();
-	void Finalize();
+	~Game();
 };
 void SetGameover();

@@ -8,9 +8,8 @@ enum eScene {
 
 	eNoneScene=5,	//eNoneはいろいろなところで使うので、eSceneのeNoneと分かるように、Scene、とつけておく。
 };
-void SceneMgrInitialize();
+
 bool SceneMgrUpdate();
 void SceneMgrDraw();
-void SceneMgrFinalize();
 
-void SetScene(eScene a);
+void SetScene(eScene next);
