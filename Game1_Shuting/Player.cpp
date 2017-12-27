@@ -1,7 +1,7 @@
 #include "dxlib.h"
 #include "Keybord.h"
 #include "SceneMgr.h"
-#include "Constant.h"
+#include "Common.h"
 
 static int m_Image01,m_Image02;
 static double m_Image2angle;

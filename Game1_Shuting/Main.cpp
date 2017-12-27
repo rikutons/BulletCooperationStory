@@ -10,10 +10,8 @@ keybord‚Ì•”•ª‚¾‚¯‚ÍŠ®‘S‚ÉƒRƒs[ƒy[ƒXƒg‚¾‚ªA‘¼‚Íl‚¦•û‚ÍQl‚É‚µ‚½‚à‚Ì‚ÌAŠî–{“
 #include "Game.h"
 #include "SceneMgr.h"
 #include "Keybord.h"
-#include "Constant.h"	//’è”‚ğ‹¤—L‚·‚éƒwƒbƒ_ƒtƒ@ƒCƒ‹(ƒEƒCƒ“ƒhƒEƒTƒCƒYA‰~ü—¦‚È‚Ç)
+#include "Common.h"	//’è”‚ğ‹¤—L‚·‚éƒwƒbƒ_ƒtƒ@ƒCƒ‹(ƒEƒCƒ“ƒhƒEƒTƒCƒYA‰~ü—¦‚È‚Ç)
 
-float cx = 0, cy = 0;
-int EndFlag = 0;
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 				//¶‚©‚ç ƒtƒ‹ƒXƒNƒŠ[ƒ“ƒ‚[ƒh‚Ì‰ğœ,Dxlib‚Ì‰Šú‰»,— ‰æ–Êˆ—‚Ì€”õ,ƒEƒCƒ“ƒhƒE–¼‚Ìw’è
@@ -22,13 +20,19 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	SetWindowSizeChangeEnableFlag(FALSE, FALSE);
 	SetGraphMode(WindowWide, WindowHeight, 16);
 	DxLib_Init();
+
+
 	SceneMgrInitialize();
 
-	while (ScreenFlip() == 0 && ProcessMessage() == 0 && ClearDrawScreen() == 0 && KeybordUpdate() == 0 && EndFlag == 0) {
+	bool EndFlag = false;
+
+	while (ScreenFlip() == 0 && ProcessMessage() == 0 && ClearDrawScreen() == 0 && KeybordUpdate() == 0 && !EndFlag) {
 		SceneMgrUpdate();
 		SceneMgrDraw();
 	}
 	SceneMgrFinalize();
+
+
 	DxLib_End();
 	return 0;
 }

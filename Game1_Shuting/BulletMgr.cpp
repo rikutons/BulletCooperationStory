@@ -4,7 +4,7 @@
 #include "BulletMode.h"
 #include "BulletMgr.h"
 #include <vector>
-#include "Constant.h"
+#include "Common.h"
 
 using namespace std;
 

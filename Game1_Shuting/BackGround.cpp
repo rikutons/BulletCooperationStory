@@ -1,5 +1,5 @@
 #include "dxlib.h"
-#include "Constant.h"
+#include "Common.h"
 
 static int m_Image01;
 

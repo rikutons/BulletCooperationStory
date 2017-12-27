@@ -3,7 +3,7 @@
 #include "DxLib.h"
 #include <math.h>
 #include <cmath>
-#include "Constant.h"
+#include "Common.h"
 
 static int BulletImage[16];
 
@@ -12,7 +12,7 @@ void BulletInitialize() {
 }
 
 //’e‚ÌŠî’êƒNƒ‰ƒX
-BaseBullet::BaseBullet(float a, float b, int c, double d) :x(a), y(b), color(c), size(d) { deathjudge = (int)(BossY * size); };
+BaseBullet::BaseBullet(float a, float b, int c, double d) :x(a), y(b), color(c), size(d) {};
 
 float BaseBullet::GetBulletx() { return x; }
 

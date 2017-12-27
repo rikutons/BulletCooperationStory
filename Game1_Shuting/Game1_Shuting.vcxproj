@@ -124,6 +124,7 @@
     <ClCompile Include="Boss.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="BulletMgr.cpp" />
+    <ClCompile Include="Common.cpp" />
     <ClCompile Include="Gameover.cpp" />
     <ClCompile Include="Keybord.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -139,7 +140,7 @@
     <ClInclude Include="BaseScene.h" />
     <ClInclude Include="Boss.h" />
     <ClInclude Include="BulletMgr.h" />
-    <ClInclude Include="Constant.h" />
+    <ClInclude Include="Common.h" />
     <ClInclude Include="End.h" />
     <ClInclude Include="Gameover.h" />
     <ClInclude Include="Keybord.h" />

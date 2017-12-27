@@ -7,7 +7,6 @@
 #include "BaseScene.h"
 
 using namespace std;
-extern int EndFlag;
 
 BaseScene *Scene=new Menu;
 
@@ -18,9 +17,9 @@ void SceneMgrInitialize() {
 	Scene->Initialize();
 }
 
-void SceneMgrUpdate()
+bool SceneMgrUpdate()
 {
-	
+	bool end=false;
 	if (nowscene!=eNoneScene) {
 		InitGraph();	//ƒƒ‚ƒŠ‚Ìˆ³”—‚ð–h‚®‚½‚ß‚ÉA‰æ‘œ‚ð‚·‚×‚ÄŠJ•ú‚µ‚Ä‚¨‚­B
 		Scene->Finalize();
@@ -35,7 +34,7 @@ void SceneMgrUpdate()
 			break;
 		case eEnd:
 			Scene = new End();
-			EndFlag++;
+			end = true;
 			break;
 		default:
 			break;
@@ -44,6 +43,7 @@ void SceneMgrUpdate()
 		nowscene = eNoneScene;
 	}
 	Scene->Update();
+	return end;
 }
 
 void SceneMgrDraw() {

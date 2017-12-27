@@ -15,7 +15,6 @@ protected:
 	float y;
 	int color;
 	double size;
-	int deathjudge;
 public:
 	BaseBullet() {}
 	BaseBullet(float a, float b, int c, double d);

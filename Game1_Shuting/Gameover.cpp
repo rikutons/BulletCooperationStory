@@ -3,7 +3,7 @@
 #include "SceneMgr.h"
 #include "Game.h"
 #include <math.h>
-#include "Constant.h"
+#include "Common.h"
 
 extern float cx, cy;
 
