@@ -16,8 +16,14 @@
     <Filter Include="ソース ファイル\GameMode">
       <UniqueIdentifier>{e6e27e06-35de-4dd5-b0ac-e43f5f4e83a4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ヘッダー ファイル\GameMode_hedda">
+    <Filter Include="ソース ファイル\GameMode\MoveObject">
+      <UniqueIdentifier>{f5e37a80-3854-4684-a4c3-b764d7b8b273}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\GameMode">
       <UniqueIdentifier>{eed2dfc5-3d39-4c3f-87ff-a9f98f09ac26}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\GameMode\MoveObject">
+      <UniqueIdentifier>{43acacfb-dc04-4ebb-bfca-4ff42429bf97}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -30,19 +36,7 @@
     <ClCompile Include="テスト用メモ.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>ソース ファイル\GameMode</Filter>
-    </ClCompile>
     <ClCompile Include="Gameover.cpp">
-      <Filter>ソース ファイル\GameMode</Filter>
-    </ClCompile>
-    <ClCompile Include="BulletMgr.cpp">
-      <Filter>ソース ファイル\GameMode</Filter>
-    </ClCompile>
-    <ClCompile Include="Boss.cpp">
-      <Filter>ソース ファイル\GameMode</Filter>
-    </ClCompile>
-    <ClCompile Include="Bullet.cpp">
       <Filter>ソース ファイル\GameMode</Filter>
     </ClCompile>
     <ClCompile Include="SceneMgr.cpp">
@@ -54,13 +48,28 @@
     <ClCompile Include="Game.cpp">
       <Filter>ソース ファイル\GameMode</Filter>
     </ClCompile>
-    <ClCompile Include="BackGround.cpp">
-      <Filter>ソース ファイル\GameMode</Filter>
+    <ClCompile Include="Mover.cpp">
+      <Filter>ソース ファイル\GameMode\MoveObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>ソース ファイル\GameMode\MoveObject</Filter>
     </ClCompile>
     <ClCompile Include="BulletMode.cpp">
+      <Filter>ソース ファイル\GameMode\MoveObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>ソース ファイル\GameMode\MoveObject</Filter>
+    </ClCompile>
+    <ClCompile Include="GameTask.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>ソース ファイル\GameMode\MoveObject</Filter>
+    </ClCompile>
+    <ClCompile Include="GameSystem.cpp">
       <Filter>ソース ファイル\GameMode</Filter>
     </ClCompile>
-    <ClCompile Include="Common.cpp">
+    <ClCompile Include="EnemyAdd.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
@@ -68,20 +77,8 @@
     <ClInclude Include="Keybord.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Boss.h">
-      <Filter>ヘッダー ファイル\GameMode_hedda</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>ヘッダー ファイル\GameMode_hedda</Filter>
-    </ClInclude>
     <ClInclude Include="Gameover.h">
-      <Filter>ヘッダー ファイル\GameMode_hedda</Filter>
-    </ClInclude>
-    <ClInclude Include="BulletMgr.h">
-      <Filter>ヘッダー ファイル\GameMode_hedda</Filter>
-    </ClInclude>
-    <ClInclude Include="Bullet.h">
-      <Filter>ヘッダー ファイル\GameMode_hedda</Filter>
+      <Filter>ヘッダー ファイル\GameMode</Filter>
     </ClInclude>
     <ClInclude Include="SceneMgr.h">
       <Filter>ヘッダー ファイル</Filter>
@@ -90,7 +87,7 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Game.h">
-      <Filter>ヘッダー ファイル\GameMode_hedda</Filter>
+      <Filter>ヘッダー ファイル\GameMode</Filter>
     </ClInclude>
     <ClInclude Include="Menu.h">
       <Filter>ヘッダー ファイル</Filter>
@@ -98,14 +95,32 @@
     <ClInclude Include="End.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="BackGround.h">
-      <Filter>ヘッダー ファイル\GameMode_hedda</Filter>
-    </ClInclude>
     <ClInclude Include="Common.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="Mover.h">
+      <Filter>ヘッダー ファイル\GameMode\MoveObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>ヘッダー ファイル\GameMode\MoveObject</Filter>
+    </ClInclude>
     <ClInclude Include="BulletMode.h">
-      <Filter>ヘッダー ファイル\GameMode_hedda</Filter>
+      <Filter>ヘッダー ファイル\GameMode\MoveObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>ヘッダー ファイル\GameMode\MoveObject</Filter>
+    </ClInclude>
+    <ClInclude Include="GameTask.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>ヘッダー ファイル\GameMode\MoveObject</Filter>
+    </ClInclude>
+    <ClInclude Include="GameSystem.h">
+      <Filter>ヘッダー ファイル\GameMode</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyAdd.h">
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

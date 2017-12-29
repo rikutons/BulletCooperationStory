@@ -1,49 +1,31 @@
+#include <cmath>
 #include "Bullet.h"
 #include "Game.h"
 #include "DxLib.h"
-#include <math.h>
-#include <cmath>
 #include "Common.h"
+#include "Bullet.h"
+#include "Mover.h"
 
-static int BulletImage[16];
+static int BulletImage[1][16];
 
 void BulletInitialize() {
-	LoadDivGraph("../material/picture/複数円形弾01.png", 16, 4, 4, 200, 200, BulletImage);
+	LoadDivGraph("../material/picture/複数円形弾01.png", 16, 4, 4, 200, 200, BulletImage[0]);
 }
 
-//弾の基底クラス
-BaseBullet::BaseBullet(float a, float b, int c, double d) :x(a), y(b), color(c), size(d) {};
+Bullet::Bullet(float X, float Y, int _ImageType, int Color, float Size, float Speed, float Speedrate, double Angle, double Carbdegree, double Anglerate) :
+	AutoMover(X, Y, _ImageType, Speed, Speedrate, Angle, Carbdegree, Anglerate), color(Color), size(Size) {}
 
-float BaseBullet::GetBulletx() { return x; }
+Bullet::Bullet(float X, float Y, float GoalX, float GoalY, int _ImageType, int Color, float Size, float Speed, float Speedrate, double Carbdegree, double Anglerate) :
+	AutoMover(X, Y, GoalX, GoalY, _ImageType, Speed, Speedrate, Carbdegree, Anglerate), color(Color), size(Size) {}
 
-float BaseBullet::GetBullety() { return y; }
-
-void BaseBullet::Draw() {
-	DrawRotaGraphF(x, y, size, 0, BulletImage[color], TRUE);
+void Bullet::Draw() {
+	DrawRotaGraphF(x, y, size, 0, BulletImage[ImageType][color], TRUE);
 }
 
-//弾1
-void B1rotation::Update() {
-	speed += speedaccel;
-	anglespeed += angleaccel;
-	angle += (PI / anglespeed)*speed;
-	x += (float)cos(angle)*speed;
-	y += (float)sin(angle)*speed;
-}
-
-//弾2
-B2straight::B2straight(float _x, float _y, int _c, double _s, float a, float b, float e,float f)
-	:BaseBullet(_x, _y, _c, _s), speed(a), speedaccel(b), goalx(e), goaly(f) {
-
-	float diffx, diffy;
-	diffx = goalx - x;
-	diffy = goaly - y;
-
-	player_angle = atan2(diffy, diffx);	//atan2...二点の座標から直角三角形を考え、その角の大きさを返してくれる関数。(ライブラリ:cmath)
-}
-
-void B2straight::Update() {
-	speed += speedaccel;
-	x += (float)cos(player_angle)*speed;
-	y += (float)sin(player_angle)*speed;
+//プレイヤーとの当たり判定計算,種類、サイズに応じて判定を調節する。
+void Bullet::IsHit(const float cx,const float cy) {
+	if ((cx - x)*(cx - x) + (cy - y)*(cy - y) <=
+		(PHitRange - BHitRange[ImageType])*(PHitRange - BHitRange[ImageType])*size) {
+		SetGameover();
+	}
 }

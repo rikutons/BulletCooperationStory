@@ -1,49 +1,30 @@
-#include "Player.h"
-#include "Keybord.h"
-#include "Boss.h"
-#include "BulletMgr.h"
-#include "Bullet.h"
-#include "Gameover.h"
-#include "SceneMgr.h"
 #include "Game.h"
-#include "BackGround.h"
+#include "Gameover.h"
+#include "GameTask.h"	
 
-static int Gameoverflag;
+bool IsGameover;
 
-Game::Game(){
-	BackGroundInitialize();
-	PlayerInitialize();
-	BossInitialize();
-	BulletInitialize();
-	BossInitialize();
-	BulletMgrInitialize();
-	Gameoverflag = 0;
+Game::Game() {
+	InitializeTask();
+	IsGameover = false;
 }
 
 void Game::Update() {
-	PlayerUpdate();
-	KeybordUpdate();
-	BulletMgrUpdate();
-	BossUpdate();
+	UpdateTask();
 }
 
 void Game::Draw() {
-	BulletMgrDraw();
-	CheckDeath();		//”»’è‚Ìã‚ª”’‚È‚çŽ‰–b”»’è‚ð‘—‚éŠÖ”B•`‰æ‚³‚ê‚½’e‚ðŒ©‚ÄŽ€–S‚·‚é‚©‚Ç‚¤‚©”»’f‚·‚é‚Ì‚ÅA’e‚ð•`‰æ‚µ‚½Œã‚És‚¤B
-	BackGroundDraw();
-	PlayerDraw();
-	BulletMgrDraw();	//’e‚Ìã‚ÉƒvƒŒƒCƒ„[‚ª‚¢‚é‚Æ•sŽ©‘R‚È‚Ì‚ÅA’e‚ð‚à‚¤ˆê“x•`‰æ‚µ‚Ä‚¨‚­B
-	BossDraw();
-	if (Gameoverflag > 0) {
+	DrawTask();
+	if (IsGameover) {
 		Gameover();
-		Gameoverflag = 0;
+		IsGameover = false;
 	}
 }
 
 Game::~Game() {
-	BulletMgrFinalize();
+	FinalizeTask();
 }
 
 void SetGameover() {
-	Gameoverflag++;
+	IsGameover = true;
 }

@@ -1,58 +1,44 @@
+#include <vector>
 #include "BulletMode.h"
 #include "Bullet.h"
-#include "BulletMgr.h"
 #include "Common.h"
+#include "DxLib.h"
+#include "GameTask.h"
 
-#define CARB 500
-#define ACCSEL1 1
-#define ACCSEL2 0
-
-extern float cx, cy;
+#define BOSS1SPEED 2
 
 using namespace std;
-void ModeBoss1::newbullet(vector<BaseBullet*> *bullet) {
-	BulletModeFlag++;
-	/*if (BulletModeFlag%30==0) {
-		m_angle ++;
-		bullet->push_back(new B1rotation(BossX, BossY, 5, 0.2, 0+m_angle, 1400, -0.07, 3.f, 0));
-		bullet->push_back(new B1rotation(BossX, BossY, 5, 0.2, 60 + m_angle, 1400, -0.07, 3.f, 0));
-		bullet->push_back(new B1rotation(BossX, BossY, 5, 0.2, 120 + m_angle, 1400, -0.07, 3.f, 0));
-		bullet->push_back(new B1rotation(BossX, BossY, 5, 0.2, 180 + m_angle, 1400, -0.07, 3.f, 0));
-		bullet->push_back(new B1rotation(BossX, BossY, 5, 0.2, 240 + m_angle, 1400, -0.07, 3.f, 0));
-		bullet->push_back(new B1rotation(BossX, BossY, 5, 0.2, 300 + m_angle, 1400, -0.07, 3.f, 0));
-	}*/
-	if (BulletModeFlag % 20 == 0) {
-		bullet->push_back(new B1rotation(BossX, BossY, 7, 0.1, 0 + m_angle, CARB, ACCSEL1, 3.f, 0)); //double 5.00 float 5.00f
-		bullet->push_back(new B1rotation(BossX, BossY, 7, 0.1, 60 + m_angle, CARB, ACCSEL1, 3.f, 0));
-		bullet->push_back(new B1rotation(BossX, BossY, 7, 0.1, 120 + m_angle, CARB, ACCSEL1, 3.f, 0));
-		bullet->push_back(new B1rotation(BossX, BossY, 7, 0.1, 180 + m_angle, CARB, ACCSEL1, 3.f, 0));
-		bullet->push_back(new B1rotation(BossX, BossY, 7, 0.1, 240 + m_angle, CARB, ACCSEL1, 3.f, 0));
-		bullet->push_back(new B1rotation(BossX, BossY, 7, 0.1, 300 + m_angle, CARB, ACCSEL1, 3.f, 0));
 
-	}
-	if (BulletModeFlag % 20 == 0) {
-		bullet->push_back(new B1rotation(BossX, BossY, 7, 0.2, 0 + m_angle, CARB, ACCSEL2, 5.f, 0));
-		bullet->push_back(new B1rotation(BossX, BossY, 7, 0.2, 60 + m_angle, CARB, ACCSEL2, 5.f, 0));
-		bullet->push_back(new B1rotation(BossX, BossY, 7, 0.2, 120 + m_angle, CARB, ACCSEL2, 5.f, 0));
-		bullet->push_back(new B1rotation(BossX, BossY, 7, 0.2, 180 + m_angle, CARB, ACCSEL2, 5.f, 0));
-		bullet->push_back(new B1rotation(BossX, BossY, 7, 0.2, 240 + m_angle, CARB, ACCSEL2, 5.f, 0));
-		bullet->push_back(new B1rotation(BossX, BossY, 7, 0.2, 300 + m_angle, CARB, ACCSEL2, 5.f, 0));
+/*
+Bullet(float X, float Y, int _ImageType, int Color, float Size, float Speed, float Speedrate, float Angle, float Carbdegree, float Anglerate);
+Bullet(float X, float Y, float GoalX, float GoalY, int _ImageType, int Color, float Size, float Speed, float Speedrate, float Carbdegree, float Anglerate);
+*/
 
-	}
+void BulletAdd(eBulletMode mode, std::vector<Bullet*> &bullet, int time, float ex, float ey, float cx, float cy, double *angle) {
+	switch (mode) {
+	case eM1Spiral:
+		if (time % 30 == 0) {
+			for (int i = 0; i < 6; i++) {
+				bullet.push_back(new Bullet(ex, ey, 0, 0, 0.2f, 2, 0, 0+i*60, 0.01, 1.001));
+			}
+		}
+		break;
+	case eBoss1_1:
+		if (time % 40 == 0) {
+			for (int i = 0; i < 6; i++) {
+				bullet.push_back(new Bullet(ex, ey, 0, 0, 0.2f, BOSS1SPEED, 0, *angle+i*60, 0.001, 0.f));
+			}
+		}
+		if (time % 10 == 0)
+			bullet.push_back(new Bullet(ex, ey, cx, cy, 0 , 5, 0.1, 1, 0.1, 0, 0.f));
+		*angle += 0.01;
+		break;
 
-	if (BulletModeFlag == 10) {
-		SetBulletMode(eBoss2,true);
-	}
-};
-
-void ModeBoss2::newbullet(vector<BaseBullet*> *bullet) {
-	BulletModeFlag++;
-	if (BulletModeFlag % 3 == 0)
-		bullet->push_back(new B2straight(GetRand(WindowWide), BossY, GetRand(15), GetRand(100)/500.0 , 1 ,0.1 , cx , cy));
+	case eBoss1_2:
+		if (time % 3 == 0)
+			bullet.push_back(new Bullet(ex, ey, cx, cy, 0, 0, 0.3f, 1, 0, 1200.f, 0.f));
+		break;
 
 
-
-	if (BulletModeFlag == 600) {
-		SetBulletMode(eBoss1,false);
 	}
 };

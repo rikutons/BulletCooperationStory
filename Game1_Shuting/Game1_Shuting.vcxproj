@@ -119,33 +119,36 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="BackGround.cpp" />
+    <ClCompile Include="EnemyAdd.cpp" />
+    <ClCompile Include="GameSystem.cpp" />
     <ClCompile Include="BulletMode.cpp" />
-    <ClCompile Include="Boss.cpp" />
+    <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Bullet.cpp" />
-    <ClCompile Include="BulletMgr.cpp" />
-    <ClCompile Include="Common.cpp" />
     <ClCompile Include="Gameover.cpp" />
+    <ClCompile Include="GameTask.cpp" />
     <ClCompile Include="Keybord.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="Mover.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="SceneMgr.cpp" />
     <ClCompile Include="テスト用メモ.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BackGround.h" />
+    <ClInclude Include="EnemyAdd.h" />
+    <ClInclude Include="GameSystem.h" />
     <ClInclude Include="BulletMode.h" />
     <ClInclude Include="BaseScene.h" />
-    <ClInclude Include="Boss.h" />
-    <ClInclude Include="BulletMgr.h" />
+    <ClInclude Include="Enemy.h" />
     <ClInclude Include="Common.h" />
     <ClInclude Include="End.h" />
     <ClInclude Include="Gameover.h" />
+    <ClInclude Include="GameTask.h" />
     <ClInclude Include="Keybord.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Menu.h" />
+    <ClInclude Include="Mover.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="SceneMgr.h" />
