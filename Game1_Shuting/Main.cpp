@@ -18,14 +18,14 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	ChangeWindowMode(TRUE),  SetDrawScreen(DX_SCREEN_BACK),SetMainWindowText("íeñãÉQÅ[ÉÄ");
 
 	SetWindowSizeChangeEnableFlag(FALSE, FALSE);
-	SetGraphMode(WindowWide, WindowHeight, 16);
+	SetGraphMode(WINDOW_WIDE, WINDOW_HEIGHT, 16);
 	DxLib_Init();
 
 
 	bool EndFlag = false;
 
 	while (ScreenFlip() == 0 && ProcessMessage() == 0 && ClearDrawScreen() == 0 && KeybordUpdate() == 0 && !EndFlag) {
-		SceneMgrUpdate();
+		EndFlag=SceneMgrUpdate();
 		SceneMgrDraw();
 	}
 

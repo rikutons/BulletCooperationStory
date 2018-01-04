@@ -20,7 +20,7 @@ void GameSystemUpdate() {
 }
 
 void GameSystemDraw(){
-	DrawRotaGraph(WindowWide/2, WindowHeight/2, 1, 0, Image[0], TRUE);
+	DrawRotaGraph(WINDOW_WIDE/2, WINDOW_HEIGHT/2, 1, 0, Image[0], TRUE);
 	//DrawStringToHandle(180, 130, , GetColor(255, 0, 0), F_Meiryo); スコアと時間の表示 とりあえずあきらめた
 	//DrawStringToHandle(210, 130, "Time=%d:%d",GameTime/3600,GameTime/60, GetColor(255, 0, 0), F_Meiryo);
 }

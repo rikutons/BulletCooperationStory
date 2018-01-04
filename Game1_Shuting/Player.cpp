@@ -4,7 +4,9 @@
 #include "Common.h"
 #include "Player.h"
 
-//0 自機 1 ファンネル
+
+
+//0.自機 1.ファンネル
 static int Image[2];
 
 void PlayerInitialize() {
@@ -24,13 +26,13 @@ void Player::Update() {
 		speed = 5;
 
 	//移動処理 枠外に出るような移動は行わない
-	if (KeybordGet(KEY_INPUT_LEFT)	> 0 && x > 0			+ FrameSizeX)  // 左
+	if (KeybordGet(KEY_INPUT_LEFT)	> 0 && x > 0			+ FRAME_SIZE_X)  // 左
 		x -= speed;
-	if (KeybordGet(KEY_INPUT_RIGHT)	> 0 && x < WindowWide	- FrameSizeX)  // 右
+	if (KeybordGet(KEY_INPUT_RIGHT)	> 0 && x < WINDOW_WIDE	- FRAME_SIZE_X)  // 右
 		x += speed;
-	if (KeybordGet(KEY_INPUT_UP)	> 0 && y > 0			+ FrameSizeY)  // 上
+	if (KeybordGet(KEY_INPUT_UP)	> 0 && y > 0			+ FRAME_SIZE_Y)  // 上
 		y -= speed;
-	if (KeybordGet(KEY_INPUT_DOWN)	> 0 && y < WindowHeight - FrameSizeY)  // 下
+	if (KeybordGet(KEY_INPUT_DOWN)	> 0 && y < WINDOW_HEIGHT - FRAME_SIZE_Y)  // 下
 		y += speed;
 
 	if (KeybordGet(KEY_INPUT_ESCAPE) > 0) 			//Escでメニューに戻る

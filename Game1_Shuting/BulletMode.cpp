@@ -10,19 +10,47 @@
 using namespace std;
 
 /*
-Bullet(float X, float Y, int _ImageType, int Color, float Size, float Speed, float Speedrate, float Angle, float Carbdegree, float Anglerate);
-Bullet(float X, float Y, float GoalX, float GoalY, int _ImageType, int Color, float Size, float Speed, float Speedrate, float Carbdegree, float Anglerate);
+Bullet::Bullet(float X, float Y, int _ImageType, int Color,
+	float Size, float Speed, float Speedrate,
+	double Angle, double Carbdegree, double Anglerate) :
+
+Bullet::Bullet(float X, float Y, float GoalX, float GoalY,
+	int _ImageType, int Color, float Size, float Speed,
+	float Speedrate, double Carbdegree, double Anglerate) :
 */
 
-void BulletAdd(eBulletMode mode, std::vector<Bullet*> &bullet, int time, float ex, float ey, float cx, float cy, double *angle) {
+/*
+eSpiral 渦巻き型
+eLaser レーザー
+最後の数字は方向,Rの場合はランダム また、その前にPがついていたらプレイヤー座標準拠
+*/
+
+void BulletAdd(eBulletMode mode, std::vector<Bullet*> &bullet, 
+	int time, float ex, float ey, float cx, float cy, double *angle,int *color) {
 	switch (mode) {
-	case eM1Spiral:
-		if (time % 30 == 0) {
-			for (int i = 0; i < 6; i++) {
-				bullet.push_back(new Bullet(ex, ey, 0, 0, 0.2f, 2, 0, 0+i*60, 0.01, 1.001));
+	case eSpiral8:
+		if (time % 15 == 0) {
+			for (int i = 0; i < 8; i++) {
+				bullet.push_back(new Bullet(ex, ey, 0, 0, 0.15f, BOSS1SPEED, 0, i * 45, 30/60.f, -0.035/60.f));
 			}
 		}
 		break;
+
+	case eLaserBigR:
+		if (time % 25 == 0) {
+			int type;
+			if (time %(25*12)== 0) {
+				*angle = GetRand(360);
+				type = 1;
+			}
+			else type = 2;
+			bullet.push_back(new Bullet(ex, ey, type, *color, 1.f, 5.f, 0, *angle, 0, -0.00));
+			if (*color != 11)++*color;
+			else *color = 0;
+		}
+		break;
+
+	//Boss1
 	case eBoss1_1:
 		if (time % 40 == 0) {
 			for (int i = 0; i < 6; i++) {
@@ -30,8 +58,8 @@ void BulletAdd(eBulletMode mode, std::vector<Bullet*> &bullet, int time, float e
 			}
 		}
 		if (time % 10 == 0)
-			bullet.push_back(new Bullet(ex, ey, cx, cy, 0 , 5, 0.1, 1, 0.1, 0, 0.f));
-		*angle += 0.01;
+			bullet.push_back(new Bullet(ex, ey, cx, cy, 0 , 5, 0.1f, 1, 0.1f, 0, 0.f));
+		*angle +=0.3;
 		break;
 
 	case eBoss1_2:

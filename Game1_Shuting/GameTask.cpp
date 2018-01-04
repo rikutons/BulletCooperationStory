@@ -12,6 +12,15 @@
 
 using namespace std;
 
+//-------------------------------------------------------------------------------------------------
+//定数
+
+//プレイヤーの座標の初期値
+#define PLAYER_X 400.f
+#define PLAYER_Y 200.f
+
+//-------------------------------------------------------------------------------------------------
+
 //PlayerTaskを簡略化した名称。よく使う、また一つしかないため簡略化した
 Player P(0, 0, 0.f, 0);
 
@@ -20,7 +29,7 @@ vector<Enemy*> EnemyTask;
 vector<Bullet*> BulletTask;
 
 void InitializeTask() {
-	Player p(InitialX, InitialY, 0.f, 0);
+	Player p(PLAYER_X, PLAYER_Y, 0.f, 0);
 	P = p;
 	PlayerInitialize();
 	EnemyInitialize();
@@ -75,18 +84,23 @@ void DrawTask() {
  	GameSystemDraw();
 
 	//debug
-	//DrawFormatString(0, 0, GetColor(255, 255, 255), "bullet.size():%d,enemy.size():%d", BulletTask.size(), EnemyTask.size());
+	
+	DrawFormatString(0, 0, GetColor(255, 255, 255), 
+				"bullet.size():%d,enemy.size():%d", BulletTask.size(), EnemyTask.size());
+	
 
 	//Player
 	P.Draw();
+	
+	//Bullet
+	SetDrawBlendMode(DX_BLENDMODE_ADD, 255);	//加算表示
+	for (auto i : BulletTask) {
+		i->Draw();
+	}
+	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 
 	//Enemy
 	for (auto i : EnemyTask) {
-		i->Draw();
-	}
-	
-	//Bullet
-	for (auto i : BulletTask) {
 		i->Draw();
 	}
 }
