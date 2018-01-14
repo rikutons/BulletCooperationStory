@@ -3,15 +3,21 @@
 #include "SceneMgr.h"
 #include "Common.h"
 #include "Player.h"
+#include "Weapon.h"
+#include "vector"
 
 
 
 //0.自機 1.ファンネル
 static int Image[2];
 
+//Weaponを発射する間隔を制御する
+int Wtime;
+
 void PlayerInitialize() {
 	Image[0] = LoadGraph("../material/picture/自機01.png");
 	Image[1] = LoadGraph("../material/picture/ファンネル01.png");
+	Wtime = 0;
 }
 
 
@@ -44,4 +50,11 @@ void Player::Update() {
 void Player::Draw() {
 	DrawRotaGraphF(x, y, 0.4, 0, Image[0], TRUE);
 	DrawRotaGraphF(x, y, 1, FunnelAngle, Image[1], TRUE);
+}
+
+void Player::WeaponPlus(std::vector<Weapon*> *weapon) {
+	Wtime++;
+	if (Wtime % 10 == 0) {
+		weapon->push_back(new Weapon(x, y));
+	}
 }

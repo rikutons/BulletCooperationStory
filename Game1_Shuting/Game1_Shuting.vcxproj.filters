@@ -72,6 +72,9 @@
     <ClCompile Include="EnemyAdd.cpp">
       <Filter>ソース ファイル\GameMode\MoveObject</Filter>
     </ClCompile>
+    <ClCompile Include="Weapon.cpp">
+      <Filter>ソース ファイル\GameMode\MoveObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Keybord.h">
@@ -120,6 +123,9 @@
       <Filter>ヘッダー ファイル\GameMode</Filter>
     </ClInclude>
     <ClInclude Include="EnemyAdd.h">
+      <Filter>ヘッダー ファイル\GameMode\MoveObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Weapon.h">
       <Filter>ヘッダー ファイル\GameMode\MoveObject</Filter>
     </ClInclude>
   </ItemGroup>

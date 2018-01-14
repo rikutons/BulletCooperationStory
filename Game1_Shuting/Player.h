@@ -1,5 +1,7 @@
 #pragma once
 #include "Mover.h"
+#include "Weapon.h"
+#include "vector"
 
 void PlayerInitialize();
 
@@ -13,6 +15,7 @@ public:
 	Player(float X, float Y, float Speed, double Angle);
 	void Update();
 	void Draw();
+	void WeaponPlus(std::vector<Weapon*> *Weapon);
 
 	float GetX(){ return x; }
 	float GetY(){ return y; }

@@ -2,6 +2,7 @@
 #include "GameTask.h"
 #include "Common.h"
 #include "Player.h"
+#include "Weapon.h"
 #include "Enemy.h"
 #include "Bullet.h"
 #include "BulletMode.h"
@@ -25,6 +26,7 @@ using namespace std;
 Player P(0, 0, 0.f, 0);
 
 //ポインタ型にしたのは、deleteしたかったから
+vector<Weapon*> WeaponTask;
 vector<Enemy*> EnemyTask;
 vector<Bullet*> BulletTask;
 
@@ -32,10 +34,12 @@ void InitializeTask() {
 	Player p(PLAYER_X, PLAYER_Y, 0.f, 0);
 	P = p;
 	PlayerInitialize();
+	WeaponInitialize();
 	EnemyInitialize();
 	EnemyAddInitialize();
 	BulletInitialize();
 	GameSystemInitialize();
+
 }
 
 void UpdateTask() {
@@ -44,6 +48,20 @@ void UpdateTask() {
 
 	//Player
 	P.Update();
+
+	//Weapon
+	P.WeaponPlus(&WeaponTask);
+	Size = WeaponTask.size();
+	for (int i = 0; i < Size; i++)
+	{
+		WeaponTask[i]->Update();
+		//alive==falseなら,武器を削除する
+		if (WeaponTask[i]->GetAlive() == false) {
+			delete WeaponTask[i];		//メモリを開放しておく
+			WeaponTask.erase(WeaponTask.begin() + i);
+			i--; Size--;
+		}
+	}
 
 	//Enemy
 	//追加
@@ -92,6 +110,11 @@ void DrawTask() {
 	//Player
 	P.Draw();
 	
+	//Weapon
+	for (auto i : WeaponTask) {
+		i->Draw();
+	}
+
 	//Bullet
 	SetDrawBlendMode(DX_BLENDMODE_ADD, 255);	//加算表示
 	for (auto i : BulletTask) {
@@ -107,6 +130,12 @@ void DrawTask() {
 
 void FinalizeTask() {
 	//Playerは、動的に確保していないのでdeleteしないでよい
+
+	//Weapon
+	for (auto i : WeaponTask) {
+		delete i;
+	}
+	WeaponTask.clear();
 
 	//Enemy
 	for (auto i : EnemyTask) {
