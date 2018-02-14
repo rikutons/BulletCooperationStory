@@ -51,7 +51,7 @@ void UpdateTask() {
 
 	//Weapon
 	P.WeaponPlus(&WeaponTask);
-	Size = WeaponTask.size();
+	Size = (int)WeaponTask.size();
 	for (int i = 0; i < Size; i++)
 	{
 		WeaponTask[i]->Update();
@@ -67,7 +67,7 @@ void UpdateTask() {
 	//追加
 	EnemyAdd(&EnemyTask);
 	//移動
-	Size = EnemyTask.size();
+	Size = (int)EnemyTask.size();
 	for (int i = 0; i < Size;i++) {
 		EnemyTask[i]->Update();
 		//プレイヤーのx座標、y座標を使って弾を発射する
@@ -82,7 +82,7 @@ void UpdateTask() {
 
 	//Bullet
 	//サイズソートをのちに実装((弾が重なった時の描画をきれいに
-	Size = BulletTask.size();
+	Size = (int)BulletTask.size();
 	for (int i = 0; i < Size; i++) {
 		BulletTask[i]->Update();
 		BulletTask[i]->IsHit(P.GetX(),P.GetY());

@@ -1,6 +1,7 @@
 #include "Game.h"
 #include "Gameover.h"
-#include "GameTask.h"	
+#include "GameTask.h"
+#include "GameSystem.h"
 
 bool IsGameover;
 

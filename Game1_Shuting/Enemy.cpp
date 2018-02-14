@@ -7,7 +7,7 @@
 static int Image[1]; //0.ボス
 
 void EnemyInitialize() {
-	Image[0] = LoadGraph("../material/picture/ボス01.png");
+	Image[0] = LoadGraph("../material/picture/Enemy01.png");
 }
 
 Enemy::Enemy(float X, float Y, int _ImageType, eBulletMode Mode,

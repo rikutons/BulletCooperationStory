@@ -15,8 +15,8 @@ static int Image[2];
 int Wtime;
 
 void PlayerInitialize() {
-	Image[0] = LoadGraph("../material/picture/自機01.png");
-	Image[1] = LoadGraph("../material/picture/ファンネル01.png");
+	Image[0] = LoadGraph("../material/picture/Player01.png");
+	Image[1] = LoadGraph("../material/picture/Funnel01.png");
 	Wtime = 0;
 }
 
@@ -32,11 +32,11 @@ void Player::Update() {
 		speed = 5;
 
 	//移動処理 枠外に出るような移動は行わない
-	if (KeybordGet(KEY_INPUT_LEFT)	> 0 && x > 0			+ FRAME_SIZE_X)  // 左
+	if (KeybordGet(KEY_INPUT_LEFT)	> 0 && x > 0 + FRAME_SIZE_X)  // 左
 		x -= speed;
-	if (KeybordGet(KEY_INPUT_RIGHT)	> 0 && x < WINDOW_WIDE	- FRAME_SIZE_X)  // 右
+	if (KeybordGet(KEY_INPUT_RIGHT)	> 0 && x < WINDOW_WIDE - FRAME_SIZE_X)  // 右
 		x += speed;
-	if (KeybordGet(KEY_INPUT_UP)	> 0 && y > 0			+ FRAME_SIZE_Y)  // 上
+	if (KeybordGet(KEY_INPUT_UP)	> 0 && y > 0 + FRAME_SIZE_Y)  // 上
 		y -= speed;
 	if (KeybordGet(KEY_INPUT_DOWN)	> 0 && y < WINDOW_HEIGHT - FRAME_SIZE_Y)  // 下
 		y += speed;

@@ -7,14 +7,14 @@
 //-----------------------------------------------------
 //íËêî
 //ïêäÌÇÃë¨ìx
-#define SPEED 5
+#define SPEED 10
 
 //-----------------------------------------------------
 
 static int Image;
 
 void WeaponInitialize() {
-	Image = LoadGraph("../material/picture/é©ã@01.png");
+	Image = LoadGraph("../material/picture/Weapon01.png");
 }
 
 
@@ -34,5 +34,5 @@ void Weapon::Update() {
 }
 
 void Weapon::Draw() {
-	DrawRotaGraphF(x, y, 0.4, 0, Image, TRUE);
+	DrawRotaGraphF(x, y, 0.2, 0, Image, TRUE);
 }

@@ -1,0 +1,18 @@
+共通事項
+hit rangeは円形弾の当たり判定部分の半径 ()内の色の占める範囲で計算している
+
+ファンネル01
+	pixel 200*200
+ボス01
+	pixel 200*200
+自機01
+	pixel 200*200
+	hit range(white) 11 
+弾01
+	pixel 200*200
+	hit range(white) 68 
+複数円形弾01
+	pixel 800*800
+	size 200*200
+	number 4*4(16)
+	hit range(white) 86

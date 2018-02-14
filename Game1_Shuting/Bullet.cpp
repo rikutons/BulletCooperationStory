@@ -20,13 +20,13 @@ const int BHitRange[] = { 30,50,50,10 }; //弾配列 defineで配列は使えないので、co
 static int BulletImage[4][16];
 
 void BulletInitialize() {
-	LoadDivGraph("../material/picture/弾01円.png",
+	LoadDivGraph("../material/picture/Bullet01_sphere.png",
 					16, 4, 4, 200, 200, BulletImage[0]);
-	LoadDivGraph("../material/picture/弾02レーザー頭.png",
+	LoadDivGraph("../material/picture/Bullet02_laser_head.png",
 					16, 4, 4, 200, 200, BulletImage[1]);
-	LoadDivGraph("../material/picture/弾03レーザー尾.png",
+	LoadDivGraph("../material/picture/Bullet03_laser_body.png",
 					16, 4, 4, 200, 200, BulletImage[2]);
-	LoadDivGraph("../material/picture/弾04星.png",
+	LoadDivGraph("../material/picture/Bullet04_star.png",
 					16, 4, 4, 200, 200, BulletImage[3]);
 }
 
