@@ -15,10 +15,13 @@ keybord‚Ì•”•ª‚¾‚¯‚ÍŠ®‘S‚ÉƒRƒs[ƒy[ƒXƒg‚¾‚ªA‘¼‚Íl‚¦•û‚ÍQl‚É‚µ‚½‚à‚Ì‚ÌAŠî–{“
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 				//¶‚©‚ç ƒtƒ‹ƒXƒNƒŠ[ƒ“ƒ‚[ƒh‚Ì‰ğœ,Dxlib‚Ì‰Šú‰»,— ‰æ–Êˆ—‚Ì€”õ,ƒEƒCƒ“ƒhƒE–¼‚Ìw’è
-	ChangeWindowMode(TRUE),  SetDrawScreen(DX_SCREEN_BACK),SetMainWindowText("’e–‹ƒQ[ƒ€");
+	ChangeWindowMode(TRUE),  SetDrawScreen(DX_SCREEN_BACK),SetMainWindowText("’e–‹˜AŒgæ");
 
-	SetWindowSizeChangeEnableFlag(FALSE, FALSE);
-	SetGraphMode(WINDOW_WIDE, WINDOW_HEIGHT, 16);
+	//altƒ|[ƒY‚ğg‚¦‚È‚­‚·‚é
+	SetSysCommandOffFlag(1);
+	//ƒAƒCƒRƒ“‚ğ•\¦‚·‚é
+	SetWindowIconID(101);
+	SetGraphMode(WINDOW_WIDE, WINDOW_HEIGHT, 32);
 	DxLib_Init();
 
 

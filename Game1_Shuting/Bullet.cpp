@@ -21,19 +21,19 @@ static int BulletImage[4][16];
 
 void BulletInitialize() {
 	LoadDivGraph("../material/picture/Bullet01_sphere.png",
-					16, 4, 4, 200, 200, BulletImage[0]);
+		16, 4, 4, 200, 200, BulletImage[0]);
 	LoadDivGraph("../material/picture/Bullet02_laser_head.png",
-					16, 4, 4, 200, 200, BulletImage[1]);
+		16, 4, 4, 200, 200, BulletImage[1]);
 	LoadDivGraph("../material/picture/Bullet03_laser_body.png",
-					16, 4, 4, 200, 200, BulletImage[2]);
+		16, 4, 4, 200, 200, BulletImage[2]);
 	LoadDivGraph("../material/picture/Bullet04_star.png",
-					16, 4, 4, 200, 200, BulletImage[3]);
+		16, 4, 4, 200, 200, BulletImage[3]);
 }
 
-Bullet::Bullet(float X, float Y, int _ImageType, int Color, 
-	float Size, float Speed, float Speedrate, 
+Bullet::Bullet(float X, float Y, int _ImageType, int Color,
+	float Size, float Speed, float Speedrate,
 	double Angle, double Carbdegree, double Anglerate) :
-	AutoMover(X, Y, _ImageType, Speed, 
+	AutoMover(X, Y, _ImageType, Speed,
 		Speedrate, Angle, Carbdegree, Anglerate),
 	color(Color), size(Size) {}
 
@@ -49,7 +49,7 @@ void Bullet::Draw() {
 }
 
 //プレイヤーとの当たり判定計算,種類、サイズに応じて判定を調節する。
-void Bullet::IsHit(const float cx,const float cy) {
+void Bullet::IsHit(const float cx, const float cy) {
 	if ((cx - x)*(cx - x) + (cy - y)*(cy - y) <=
 		(P_HIT_RANGE + BHitRange[ImageType])*
 		(P_HIT_RANGE + BHitRange[ImageType])*size) {

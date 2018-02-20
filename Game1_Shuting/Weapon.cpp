@@ -11,15 +11,16 @@
 
 //-----------------------------------------------------
 
-static int Image;
+static int Image[2];
 
 void WeaponInitialize() {
-	Image = LoadGraph("../material/picture/Weapon01.png");
+	Image[0] = LoadGraph("../material/picture/Weapon01.png");
+	Image[1] = LoadGraph("../material/picture/Weapon02.png");
 }
 
 
-Weapon::Weapon(float X, float Y) :
-	Mover(X,Y,SPEED,0) {}
+Weapon::Weapon(float X, float Y,int WeaponNum) :
+	Mover(X,Y,SPEED,0),weaponNum(WeaponNum) {}
 
 
 void Weapon::Update() {
@@ -34,5 +35,5 @@ void Weapon::Update() {
 }
 
 void Weapon::Draw() {
-	DrawRotaGraphF(x, y, 0.2, 0, Image, TRUE);
+	DrawRotaGraphF(x, y, 0.2, 0, Image[weaponNum], TRUE);
 }

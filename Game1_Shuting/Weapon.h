@@ -5,11 +5,12 @@ void WeaponInitialize();
 
 /*
 プレイヤーとファンネルのクラス。
-引数は(4+0)つ。
+引数は(2+1)つ。
 */
 class Weapon :public Mover {
+	int weaponNum;
 public:
-	Weapon(float X, float Y);
+	Weapon(float X, float Y,int WeaponNum);
 	void Update();
 	void Draw();
 

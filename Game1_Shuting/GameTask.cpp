@@ -17,13 +17,15 @@ using namespace std;
 //定数
 
 //プレイヤーの座標の初期値
-#define PLAYER_X 400.f
-#define PLAYER_Y 200.f
+#define PLAYER1_X 200.f
+#define PLAYER1_Y 400.f
 
+#define PLAYER2_X 500.f
+#define PLAYER2_Y 400.f
 //-------------------------------------------------------------------------------------------------
 
-//PlayerTaskを簡略化した名称。よく使う、また一つしかないため簡略化した
-Player P(0, 0, 0.f, 0);
+//PlayerTaskを簡略化した名称。よく使う、また二つしかないため簡略化した
+Player P[PLAYER_NUM];
 
 //ポインタ型にしたのは、deleteしたかったから
 vector<Weapon*> WeaponTask;
@@ -31,15 +33,16 @@ vector<Enemy*> EnemyTask;
 vector<Bullet*> BulletTask;
 
 void InitializeTask() {
-	Player p(PLAYER_X, PLAYER_Y, 0.f, 0);
-	P = p;
+	Player p1(PLAYER1_X, PLAYER1_Y, 0);
+	Player p2(PLAYER2_X, PLAYER2_Y, 1);
+	P[0] = p1;
+	P[1] = p2;
 	PlayerInitialize();
 	WeaponInitialize();
 	EnemyInitialize();
 	EnemyAddInitialize();
 	BulletInitialize();
 	GameSystemInitialize();
-
 }
 
 void UpdateTask() {
@@ -47,10 +50,13 @@ void UpdateTask() {
 	int Size;
 
 	//Player
-	P.Update();
-
+	for (int i = 0; i < PLAYER_NUM; i++)
+	{
+		P[i].Update();
+		P[i].WeaponPlus(&WeaponTask);
+	}
+	
 	//Weapon
-	P.WeaponPlus(&WeaponTask);
 	Size = (int)WeaponTask.size();
 	for (int i = 0; i < Size; i++)
 	{
@@ -68,12 +74,12 @@ void UpdateTask() {
 	EnemyAdd(&EnemyTask);
 	//移動
 	Size = (int)EnemyTask.size();
-	for (int i = 0; i < Size;i++) {
+	for (int i = 0; i < Size; i++) {
 		EnemyTask[i]->Update();
 		//プレイヤーのx座標、y座標を使って弾を発射する
-		EnemyTask[i]->BulletPlus(BulletTask,P.GetX(), P.GetY());	
+		EnemyTask[i]->BulletPlus(BulletTask, P[0].GetX(), P[0].GetY());
 		//alive==falseなら,敵を削除する
-		if (EnemyTask[i]->GetAlive() == false) { 
+		if (EnemyTask[i]->GetAlive() == false) {
 			delete EnemyTask[i];		//メモリを開放しておく
 			EnemyTask.erase(EnemyTask.begin() + i);
 			i--; Size--;
@@ -85,7 +91,10 @@ void UpdateTask() {
 	Size = (int)BulletTask.size();
 	for (int i = 0; i < Size; i++) {
 		BulletTask[i]->Update();
-		BulletTask[i]->IsHit(P.GetX(),P.GetY());
+		for (int j = 0; j < PLAYER_NUM; j++)
+		{
+			//BulletTask[i]->IsHit(P[j].GetX(), P[j].GetY());
+		}
 		if (BulletTask[i]->GetAlive() == false) {
 			delete BulletTask[i];
 			BulletTask.erase(BulletTask.begin() + i);
@@ -94,22 +103,24 @@ void UpdateTask() {
 	}
 
 	//System
-	void GameSystemUpdate();
+	GameSystemUpdate();
 }
 
 void DrawTask() {
-	//System 背景を含むので、一番最初に描画
- 	GameSystemDraw();
+	//BackGround
+	BackGroundDraw();
 
 	//debug
-	
-	DrawFormatString(0, 0, GetColor(255, 255, 255), 
-				"bullet.size():%d,enemy.size():%d", BulletTask.size(), EnemyTask.size());
-	
+
+	//DrawFormatString(0, 0, GetColor(255, 255, 255), 
+	//			"bullet.size():%d,enemy.size():%d", BulletTask.size(), EnemyTask.size());
+
 
 	//Player
-	P.Draw();
-	
+	for (int i = 0; i < PLAYER_NUM; i++) {
+		P[i].Draw();
+	}
+
 	//Weapon
 	for (auto i : WeaponTask) {
 		i->Draw();
@@ -126,6 +137,9 @@ void DrawTask() {
 	for (auto i : EnemyTask) {
 		i->Draw();
 	}
+
+	//System
+	GameSystemDraw();
 }
 
 void FinalizeTask() {

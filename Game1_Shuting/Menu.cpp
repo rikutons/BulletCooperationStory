@@ -25,11 +25,13 @@ Menu::Menu() {
 
 void Menu::Update() {
 
-	if (CursorCheck(KeybordGet(KEY_INPUT_DOWN))) { // 下キーが押されていたら下にカーソルを移動する
+	if (CursorCheck(KeybordGet(KEY_INPUT_DOWN))||
+			CursorCheck(KeybordGet(KEY_INPUT_S))) { // 下キーかSキーが押されていたら下にカーソルを移動する
 		Menupoint = (Menupoint + 1) % 5;
 		PlaySoundMem(SE_Select, DX_PLAYTYPE_BACK);
 	}
-	if (CursorCheck(KeybordGet(KEY_INPUT_UP))) { // 上キーが押されていたら上にカーソルを移動する
+	if (CursorCheck(KeybordGet(KEY_INPUT_UP)) ||
+			CursorCheck(KeybordGet(KEY_INPUT_W))) { // 上キーかWキーが押されていたら上にカーソルを移動する
 		Menupoint = (Menupoint + 4) % 5;
 		PlaySoundMem(SE_Select, DX_PLAYTYPE_BACK);
 	}

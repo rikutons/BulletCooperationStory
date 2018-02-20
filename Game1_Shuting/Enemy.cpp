@@ -45,7 +45,6 @@ void Enemy::BulletPlus(std::vector<Bullet*> &bullet, float cx, float cy) {
 			break;
 		case eMulti1:
 			BulletAdd(eSpiral8, bullet, time, x, y, cx, cy, &Brotation, &Bcolor);
-			BulletAdd(eLaserBigR, bullet, time, x, y, cx, cy, &Brotation, &Bcolor);
 			break;
 		}
 	}
