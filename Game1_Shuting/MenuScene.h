@@ -1,12 +1,12 @@
 #pragma once
 #include "BaseScene.h"
 
-class MenuDeta {
-public:
+struct MenuDeta {
 	int x;
 	int y;
 	char MenuName[30];
 };
+
 class Menu:public BaseScene {
 public:
 	Menu();

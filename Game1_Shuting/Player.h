@@ -17,7 +17,7 @@ public:
 	Player(float X, float Y, int PlayerNum);
 	void Update();
 	void Draw();
-	void WeaponPlus(std::vector<Weapon*> *Weapon);
+	void WeaponPlus(std::vector<Weapon> &Weapon);
 
 	float GetX() { return x; }
 	float GetY() { return y; }

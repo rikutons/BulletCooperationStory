@@ -11,8 +11,6 @@
 #define BOSS_X 400.f
 #define BOSS_Y 100.f
 
-
-
 //----------------------------------------------------
 
 int Faze;
@@ -34,12 +32,12 @@ Enemy(float X, float Y, float GoalX, float GoalY,
 	double Anglerate, double BRotation, int BColor);
 */
 
-void EnemyAdd(std::vector<Enemy*> *enemy) {
+void EnemyAdd(std::vector<Enemy> &enemy) {
 	ETime++;
 	switch (Faze) {
 	case 0:
 		if (ETime == 10) {
-			enemy->push_back(new Enemy(BOSS_X,BOSS_Y,0,eMulti1,50000,0,0,0.0,0,0.0,0,0));
+			enemy.push_back(Enemy(BOSS_X,BOSS_Y,0,eMulti1,50000,0,0,0.0,0,0.0,0,0));
 		}
 		break;
 	}

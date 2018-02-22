@@ -1,19 +1,16 @@
 #include "dxlib.h"
-#include "Game.h"
-#include "Menu.h"
-#include "End.h"
-#include "SceneMgr.h"
 #include "BaseScene.h"
+#include "MenuScene.h"
+#include "GameScene.h"
+#include "GameOverScene.h"
 
-using namespace std;
-
-BaseScene *Scene=new Menu();
+BaseScene *Scene;
 
 eScene nowscene=eMenu;
 
-bool SceneMgrUpdate()
+bool SceneMgr()
 {
-	bool end=false;
+	//nowsceneに合わせて、sceneを切り替える
 	if (nowscene!=eNoneScene) {
 		InitGraph();	//メモリの圧迫を防ぐために、画像をすべて開放しておく。
 		WaitTimer(500); //シーンが変わったとき、0.5秒止めることで、シーンが一瞬で変わってプレイヤーが混乱することを防ぐ。
@@ -26,8 +23,10 @@ bool SceneMgrUpdate()
 			Scene = new Game();
 			break;
 		case eEnd:
-			Scene = new End();
-			end = true;
+			return true; //Endなら終了
+			break;
+		case eGameOver:
+			Scene = new GameOver();
 			break;
 		default:
 			break;
@@ -35,14 +34,10 @@ bool SceneMgrUpdate()
 		nowscene = eNoneScene;
 	}
 	Scene->Update();
-	return end;
-}
-
-void SceneMgrDraw() {
 	Scene->Draw();
+	return false;
 }
 
-
-void SetScene (eScene next){
-	nowscene = next;
+void SetScene (eScene nextScene){
+	nowscene = nextScene;
 };

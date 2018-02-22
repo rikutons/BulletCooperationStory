@@ -29,6 +29,6 @@ public:
 		double Anglerate, double BRotation, int BColor);
 	void Update() { AutoMover::Update(); };
 	void Draw();
-	void BulletPlus(std::vector<Bullet*> &bullet,float cx, float cy);
+	void BulletPlus(std::vector<Bullet> &bullet,float cx, float cy);
 };
 

@@ -1,5 +1,6 @@
 /*
 
+DrawFormatString(0, 0, GetColor(255,255,255), "”’l1:%d", );
 DrawFormatString(0, 0, GetColor(255,255,255), "”’l1:%d,”’l2:%d", , );
 
 DrawFormatString(BOSS_X, 240, GetColor(255, 255, 255), "x:%f,y:%f", x, y);

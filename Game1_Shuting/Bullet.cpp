@@ -1,10 +1,10 @@
 #include <cmath>
 #include "Bullet.h"
-#include "Game.h"
 #include "DxLib.h"
 #include "Bullet.h"
 #include "Mover.h"
 #include "Common.h"
+#include "GameSystem.h"
 
 
 //-------------------------------------------------------------------------------------------------
@@ -49,10 +49,10 @@ void Bullet::Draw() {
 }
 
 //プレイヤーとの当たり判定計算,種類、サイズに応じて判定を調節する。
-void Bullet::IsHit(const float cx, const float cy) {
+void Bullet::IsHit(const float cx, const float cy, const int playerNum) {
 	if ((cx - x)*(cx - x) + (cy - y)*(cy - y) <=
 		(P_HIT_RANGE + BHitRange[ImageType])*
 		(P_HIT_RANGE + BHitRange[ImageType])*size) {
-		SetGameover();
+		LifeDown(playerNum);
 	}
 }

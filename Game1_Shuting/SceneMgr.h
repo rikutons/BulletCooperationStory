@@ -1,15 +1,14 @@
 #pragma once
-#include"BaseScene.h"
 
 enum eScene {
-	eMenu=-1,
-	eGame=0,
-	eEnd=4,
+	eMenu = -1,
+	eGame = 0,
+	eEnd = 4,
 
-	eNoneScene=5,	//eNoneはいろいろなところで使うので、eSceneのeNoneと分かるように、Scene、とつけておく。
+	eNoneScene = 5,	//eNoneはいろいろなところで使うので、eSceneのeNoneと分かるように、Scene、とつけておく。
+	eGameOver = 6,
 };
 
-bool SceneMgrUpdate();
-void SceneMgrDraw();
+bool SceneMgr();
 
 void SetScene(eScene next);

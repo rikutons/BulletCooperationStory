@@ -14,6 +14,6 @@ enum eBulletMode {
 	eMulti1
 };
 
-void BulletAdd(eBulletMode mode, vector<Bullet*> &bullet,
+void BulletAdd(eBulletMode mode, vector<Bullet> &bullet,
 	int time, float ex, float ey,
 	float cx, float cy, double *angle, int *color);

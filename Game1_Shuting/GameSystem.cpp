@@ -22,8 +22,12 @@ void GameSystemInitialize() {
 	F_Airstrike = CreateFontToHandle("Airstrike", 22, 3, DX_FONTTYPE_ANTIALIASING_EDGE);
 }
 
-void GameSystemUpdate() {
+bool GameSystemUpdate() {
 	GameTime++;
+	if (Life[0] < 0 && Life[1] < 0) {
+		return true;
+	}
+	return false;
 }
 
 void BackGroundDraw() {
@@ -46,4 +50,12 @@ void GameSystemDraw() {
 		(GameTime / 3600 % 3600) % (GameTime / 60 % 60)).str();
 	DrawStringToHandle(WINDOW_WIDE / 2 - 90, 0,
 		Output.c_str(), GetColor(255, 255, 255), F_Airstrike);
+}
+
+void LifeDown(int pNum) {
+	Life[pNum]--;
+}
+
+void AddScore(int pNum , int score) {
+	Score[pNum]+=score;
 }

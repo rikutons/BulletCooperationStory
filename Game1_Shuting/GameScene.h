@@ -1,5 +1,6 @@
 #pragma once
 #include "BaseScene.h"
+
 class Game:public BaseScene {
 public:
 	Game();
@@ -7,4 +8,3 @@ public:
 	void Draw();
 	~Game();
 };
-void SetGameover();

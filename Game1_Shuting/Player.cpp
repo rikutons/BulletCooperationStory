@@ -4,7 +4,7 @@
 #include "Common.h"
 #include "Player.h"
 #include "Weapon.h"
-#include "vector"
+#include <vector>
 
 
 
@@ -74,11 +74,11 @@ void Player::Draw() {
 	DrawRotaGraphF(x, y, 1, FunnelAngle, Image[playerNum+2], TRUE);
 }
 
-void Player::WeaponPlus(std::vector<Weapon*> *weapon) {
+void Player::WeaponPlus(std::vector<Weapon> &weapon) {
 	//2p‚ÌŽž‚¾‚¯ƒJƒEƒ“ƒg‚·‚é
 	Wtime += playerNum;
 
 	if (Wtime % 10 == 0) {
-		weapon->push_back(new Weapon(x, y, playerNum));
+		weapon.push_back(Weapon(x, y, playerNum));
 	}
 }

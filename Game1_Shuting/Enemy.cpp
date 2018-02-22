@@ -29,7 +29,7 @@ void Enemy::Draw() {
 
 }
 
-void Enemy::BulletPlus(std::vector<Bullet*> &bullet, float cx, float cy) {
+void Enemy::BulletPlus(std::vector<Bullet> &bullet, float cx, float cy) {
 	if ((int)mode < 100) {
 		BulletAdd(mode, bullet, time, x, y, cx, cy, &Brotation,&Bcolor);
 	}

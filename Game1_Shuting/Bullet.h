@@ -15,5 +15,5 @@ public:
 	Bullet(float X, float Y, float GoalX, float GoalY, int _ImageType, int Color, float Size, float Speed, float Speedrate, double Carbdegree, double Anglerate);
 	void Update() { AutoMover::Update(); };
 	void Draw();
-	void IsHit(const float cx, const float cy);
+	void IsHit(const float cx, const float cy, const int playerNum);
 };
