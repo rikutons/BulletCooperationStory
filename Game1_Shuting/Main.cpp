@@ -23,14 +23,12 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	DxLib_Init();
 	//----------------------------------------------------------
 
-	SetFontSize(20);
+	bool isEnd = false;
 
-	bool EndFlag = false;
+	while (ScreenFlip() == 0 && ProcessMessage() == 0
+		&& ClearDrawScreen() == 0 && KeybordUpdate() == 0 && isEnd == false) {
 
-	while (ScreenFlip() == 0 && ProcessMessage() == 0 
-		&& ClearDrawScreen() == 0 && KeybordUpdate() == 0 && !EndFlag) {
-		
-		EndFlag = SceneMgr();
+		isEnd = SceneMgr();
 
 	}
 

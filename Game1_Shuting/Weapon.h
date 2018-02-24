@@ -8,12 +8,12 @@ void WeaponInitialize();
 ˆø”‚Í(2+1)‚ÂB
 */
 class Weapon :public Mover {
-	int weaponNum;
+	int m_weaponNum;
 public:
-	Weapon(float X, float Y,int WeaponNum);
+	Weapon(float, float, int);
 	void Update();
 	void Draw();
 
-	float GetX() { return x; }
-	float GetY() { return y; }
+	float GetX() { return m_x; }
+	float GetY() { return m_y; }
 };

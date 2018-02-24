@@ -13,12 +13,12 @@
 
 //----------------------------------------------------
 
-int Faze;
-int ETime;
+int faze;
+int addCount;
 
 void EnemyAddInitialize() {
-	Faze = 0;
-	ETime = 0;
+	faze = 0;
+	addCount = 0;
 }
 
 /*
@@ -33,11 +33,15 @@ Enemy(float X, float Y, float GoalX, float GoalY,
 */
 
 void EnemyAdd(std::vector<Enemy> &enemy) {
-	ETime++;
-	switch (Faze) {
+	addCount++;
+	switch (faze) {
 	case 0:
-		if (ETime == 10) {
-			enemy.push_back(Enemy(BOSS_X,BOSS_Y,0,eMulti1,50000,0,0,0.0,0,0.0,0,0));
+		if (addCount == 10) {
+			enemy.push_back(Enemy(
+				BOSS_X, BOSS_Y, 0, eMulti1,
+				50000, 0, 0, 0.0,
+				0, 0.0, 0, 0)
+			);
 		}
 		break;
 	}

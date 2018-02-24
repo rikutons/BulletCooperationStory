@@ -16,43 +16,46 @@ const int BHitRange[] = { 30,50,50,10 }; //弾配列 defineで配列は使えないので、co
 
 //-------------------------------------------------------------------------------------------------
 
-
-static int BulletImage[4][16];
-
-void BulletInitialize() {
-	LoadDivGraph("../material/picture/Bullet01_sphere.png",
-		16, 4, 4, 200, 200, BulletImage[0]);
-	LoadDivGraph("../material/picture/Bullet02_laser_head.png",
-		16, 4, 4, 200, 200, BulletImage[1]);
-	LoadDivGraph("../material/picture/Bullet03_laser_body.png",
-		16, 4, 4, 200, 200, BulletImage[2]);
-	LoadDivGraph("../material/picture/Bullet04_star.png",
-		16, 4, 4, 200, 200, BulletImage[3]);
+namespace {
+	int image[4][16];
 }
 
-Bullet::Bullet(float X, float Y, int _ImageType, int Color,
+//分割して読み込む
+void BulletInitialize() {
+	LoadDivGraph("../material/picture/Bullet01_sphere.png",
+		16, 4, 4, 200, 200, image[0]);
+	LoadDivGraph("../material/picture/Bullet02_laser_head.png",
+		16, 4, 4, 200, 200, image[1]);
+	LoadDivGraph("../material/picture/Bullet03_laser_body.png",
+		16, 4, 4, 200, 200, image[2]);
+	LoadDivGraph("../material/picture/Bullet04_star.png",
+		16, 4, 4, 200, 200, image[3]);
+}
+
+Bullet::Bullet(float X, float Y, int ImageType, int Color,
 	float Size, float Speed, float Speedrate,
 	double Angle, double Carbdegree, double Anglerate) :
-	AutoMover(X, Y, _ImageType, Speed,
+	AutoMover(X, Y, ImageType, Speed,
 		Speedrate, Angle, Carbdegree, Anglerate),
-	color(Color), size(Size) {}
+	m_color(Color), m_size(Size) {}
 
 Bullet::Bullet(float X, float Y, float GoalX, float GoalY,
-	int _ImageType, int Color, float Size, float Speed,
+	int ImageType, int Color, float Size, float Speed,
 	float Speedrate, double Carbdegree, double Anglerate) :
-	AutoMover(X, Y, GoalX, GoalY, _ImageType,
+	AutoMover(X, Y, GoalX, GoalY, ImageType,
 		Speed, Speedrate, Carbdegree, Anglerate),
-	color(Color), size(Size) {}
+	m_color(Color), m_size(Size) {}
 
 void Bullet::Draw() {
-	DrawRotaGraphF(x, y, size, angle, BulletImage[ImageType][color], TRUE);
+	DrawRotaGraphF(m_x, m_y, m_size, m_angle, image[m_imageType][m_color], TRUE);
 }
 
 //プレイヤーとの当たり判定計算,種類、サイズに応じて判定を調節する。
-void Bullet::IsHit(const float cx, const float cy, const int playerNum) {
-	if ((cx - x)*(cx - x) + (cy - y)*(cy - y) <=
-		(P_HIT_RANGE + BHitRange[ImageType])*
-		(P_HIT_RANGE + BHitRange[ImageType])*size) {
-		LifeDown(playerNum);
+bool Bullet::IsHit(const float cx, const float cy) {
+	if ((cx - m_x)*(cx - m_x) + (cy - m_y)*(cy - m_y) <=
+		(P_HIT_RANGE + BHitRange[m_imageType])*
+		(P_HIT_RANGE + BHitRange[m_imageType])*m_size) {
+		return true;
 	}
+	return false;
 }

@@ -3,4 +3,4 @@
 #include "Enemy.h"
 
 void EnemyAddInitialize();
-void EnemyAdd(std::vector<Enemy> &enemy);
+void EnemyAdd(std::vector<Enemy>&);

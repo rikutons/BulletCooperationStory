@@ -6,35 +6,35 @@
 */
 class Mover {
 protected:
-	float	x, y,
-		speed;
-	double angle;
-	bool alive;
+	float m_x, m_y,
+		m_speed;
+	double m_angle;
+	bool m_alive;
 public:
 	Mover(float X, float Y, float Speed, double Angle);
 	virtual void Update() = 0;
 	virtual void Draw() = 0;
-	bool GetAlive() { return alive; }
+	bool GetAlive() { return m_alive; }
 };
 
 /*
 移動するもののうち、入力に関係せず複雑な動きをするクラス。
 速度と曲がり具合は全く対応しない。
-固定弾:引数(4+4=)8つ。 5.どの画像を使うか 詳細はEnemy.cpp 6.倒した時に得られるスコア 7.加速度 
+固定弾:引数(4+4=)8つ。 5.どの画像を使うか 詳細はEnemy.cpp 6.倒した時に得られるスコア 7.加速度
 8.初期の曲がり具合(曲がる程度) 一秒間にn*60度回転する。(60fps
 9.曲がり具合の加速度 一秒間にn*60度回転量が増加する。(60fps
 変化する座標に依存する弾:引数(4-1+6=)9つ。 初期角度をなくし、10.目標X 11.目標y
 */
 class AutoMover :public Mover {
 protected:
-	int ImageType;
-	float speedrate;
-	double carbdegree;
-	double anglerate, angleplus;
+	int m_imageType;
+	float m_speedRate;
+	double m_carbDegree;
+	double m_angleRate, m_anglePlus;
 public:
-	AutoMover(float X, float Y, int _ImageType, float Speed, float Speedrate, double Angle , double Carbdegree, double Anglerate);	//固定弾
+	AutoMover(float, float, int, float, float, double, double, double);	//固定弾
 
-	AutoMover(float X, float Y, float GoalX, float GoalY, int _ImageType, float Speed, float Speedrate, double Carbdegree, double Anglerate);	
+	AutoMover(float, float, float, float, int, float, float, double, double);
 	//変化する座標に依存する弾
 	void Update();
 };

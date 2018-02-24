@@ -23,19 +23,18 @@ using namespace std;
 #define PLAYER2_Y 400.f
 //-------------------------------------------------------------------------------------------------
 
-//PlayerTaskを簡略化した名称。よく使う、また二つしかないため簡略化した
-Player P[PLAYER_NUM];
-
-vector<Weapon> WeaponTask;
-vector<Enemy> EnemyTask;
-vector<Bullet> BulletTask;
+//プレイヤーの数は固定なので、固定長配列を使用する
+Player playerTask[PLAYER_NUM];
+vector<Weapon> weaponTask;
+vector<Enemy> enemyTask;
+vector<Bullet> bulletTask;
 
 
 Game::Game() {
 	Player p1(PLAYER1_X, PLAYER1_Y, 0);
 	Player p2(PLAYER2_X, PLAYER2_Y, 1);
-	P[0] = p1;
-	P[1] = p2;
+	playerTask[0] = p1;
+	playerTask[1] = p2;
 	PlayerInitialize();
 	WeaponInitialize();
 	EnemyInitialize();
@@ -46,58 +45,62 @@ Game::Game() {
 
 void Game::Update() {
 	//要素数を表す変数
-	int Size;
+	int size;
 
 	//Player
 	for (int i = 0; i < PLAYER_NUM; i++)
 	{
-		P[i].Update();
-		P[i].WeaponPlus(WeaponTask);
+		playerTask[i].Update();
+		playerTask[i].WeaponPlus(weaponTask);
 	}
 
 	//Weapon
-	Size = (int)WeaponTask.size();
-	for (int i = 0; i < Size; i++)
+	size = (int)weaponTask.size();
+	for (int i = 0; i < size; i++)
 	{
-		WeaponTask[i].Update();
-		if (WeaponTask[i].GetAlive() == false) {//alive==falseなら,武器を削除する
-			WeaponTask.erase(WeaponTask.begin() + i);
-			i--; Size--;
+		weaponTask[i].Update();
+		if (weaponTask[i].GetAlive() == false) {//alive==falseなら,武器を削除する
+			weaponTask.erase(weaponTask.begin() + i);
+			i--; size--;
 		}
 	}
-	WeaponTask.shrink_to_fit();//削除した分のメモリを開放する
+	weaponTask.shrink_to_fit();//削除した分のメモリを開放する
 
 	//Enemy
 	//追加処理
-	EnemyAdd(EnemyTask);
+	EnemyAdd(enemyTask);
 	//移動、弾の発射、削除
-	Size = (int)EnemyTask.size();
-	for (int i = 0; i < Size; i++) {
-		EnemyTask[i].Update();
+	size = (int)enemyTask.size();
+	for (int i = 0; i < size; i++) {
+		enemyTask[i].Update();
 		//プレイヤーのx座標、y座標を使って弾を発射する
-		EnemyTask[i].BulletPlus(BulletTask, P[0].GetX(), P[0].GetY());
-		if (EnemyTask[i].GetAlive() == false) {
-			EnemyTask.erase(EnemyTask.begin() + i);
-			i--; Size--;
+		enemyTask[i].BulletPlus(bulletTask, playerTask[0].GetX(), playerTask[0].GetY());
+		if (enemyTask[i].GetAlive() == false) {
+			enemyTask.erase(enemyTask.begin() + i);
+			i--; size--;
 		}
 	}
-	BulletTask.shrink_to_fit();
+	bulletTask.shrink_to_fit();
 
 	//Bullet
 	//サイズソートをのちに実装((弾が重なった時の描画をきれいに
-	Size = (int)BulletTask.size();
-	for (int i = 0; i < Size; i++) {
-		BulletTask[i].Update();
+	size = (int)bulletTask.size();
+	for (int i = 0; i < size; i++) {
+		bulletTask[i].Update();
 		for (int j = 0; j < PLAYER_NUM; j++)//当たり判定
 		{
-			BulletTask[i].IsHit(P[j].GetX(), P[j].GetY(), j);
+			if (playerTask[j].GetInvTime() != 0) continue;
+			if (bulletTask[i].IsHit(playerTask[j].GetX(), playerTask[j].GetY())) {
+				LifeDown(j);
+				playerTask[j].InvTimePlus();
+			}
 		}
-		if (BulletTask[i].GetAlive() == false) {
-			BulletTask.erase(BulletTask.begin() + i);
-			i--; Size--;
+		if (bulletTask[i].GetAlive() == false) {
+			bulletTask.erase(bulletTask.begin() + i);
+			i--; size--;
 		}
 	}
-	BulletTask.shrink_to_fit();
+	bulletTask.shrink_to_fit();
 
 	//System trueならゲームオーバー
 	if (GameSystemUpdate() == true) SetScene(eGameOver);
@@ -109,21 +112,21 @@ void Game::Draw() {
 
 	//debug
 	//DrawFormatString(0, 0, GetColor(255, 255, 255),
-	//	"Bullet.capacity():%d,Bullet.size():%d", BulletTask.capacity(), BulletTask.size());
+	//	"Bullet.capacity():%d,Bullet.size():%d", bulletTask.capacity(), bulletTask.size());
 
 	//Player
-	for (int i = 0; i < PLAYER_NUM; i++) P[i].Draw();
+	for (int i = 0; i < PLAYER_NUM; i++) playerTask[i].Draw();
 
 	//Bullet
-	for (auto i : WeaponTask) i.Draw();
+	for (auto i : weaponTask) i.Draw();
 
 	//Bullet
 	SetDrawBlendMode(DX_BLENDMODE_ADD, 255);	//加算表示
-	for (auto i : BulletTask) i.Draw();
+	for (auto i : bulletTask) i.Draw();
 	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 
 	//Enemy
-	for (auto i : EnemyTask) i.Draw();
+	for (auto i : enemyTask) i.Draw();
 
 	//System
 	GameSystemDraw();
@@ -133,11 +136,11 @@ Game::~Game() {
 	//Playerは、動的に確保していないのでdeleteしないでよい
 
 	//Weapon
-	vector<Weapon>().swap(WeaponTask);
+	vector<Weapon>().swap(weaponTask);
 
 	//Enemy
-	vector<Enemy>().swap(EnemyTask);
+	vector<Enemy>().swap(enemyTask);
 
 	//Bullet
-	vector<Bullet>().swap(BulletTask);
+	vector<Bullet>().swap(bulletTask);
 }

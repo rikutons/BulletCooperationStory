@@ -6,27 +6,37 @@
 #include "Weapon.h"
 #include <vector>
 
+//-----------------------------------------------------------------------------
+//定数
+//無敵時間のフレーム数
+#define INV_TIME 180
 
+//無敵時間の点滅感覚
+#define FRASH_INTERVAL 30
 
-//0.自機1 1.自機2 2.ファンネル1 3.ファンネル2
-static int Image[4];
+//-----------------------------------------------------------------------------
+
+namespace {
+	//0.自機1 1.自機2 2.ファンネル1 3.ファンネル2
+	int image[4];
+}
 
 //Weaponを発射する間隔を制御する
-int Wtime;
+int shotCount;
 
 void PlayerInitialize() {
-	Image[0] = LoadGraph("../material/picture/Player01.png");
-	Image[1] = LoadGraph("../material/picture/Player02.png");
-	Image[2] = LoadGraph("../material/picture/Funnel01.png");
-	Image[3] = LoadGraph("../material/picture/Funnel02.png");
-	Wtime = 0;
+	image[0] = LoadGraph("../material/picture/Player01.png");
+	image[1] = LoadGraph("../material/picture/Player02.png");
+	image[2] = LoadGraph("../material/picture/Funnel01.png");
+	image[3] = LoadGraph("../material/picture/Funnel02.png");
+	shotCount = 0;
 }
 
 //GameTaskで、配列で宣言する際専用の引数なしのコンストラクタ
 Player::Player() : Mover(0, 0, 0, 0) {}
 
-Player::Player(float X, float Y,int PlayerNum) :
-	Mover(X, Y, 0, 0), FunnelAngle(0), playerNum(PlayerNum) {}
+Player::Player(float X, float Y, int PlayerNum) :
+	Mover(X, Y, 0, 0), m_funnelAngle(0), m_playerNum(PlayerNum), m_invincibleTime(0) {}
 
 
 void Player::Update() {
@@ -37,48 +47,63 @@ void Player::Update() {
 							KEY_INPUT_DOWN ,KEY_INPUT_RSHIFT } };
 
 
-	if (KeybordGet(keyP[playerNum][4]) > 0) //低速
-		speed = 3;
+	if (KeybordGet(keyP[m_playerNum][4]) > 0) //低速
+		m_speed = 3;
 	else
-		speed = 5;
+		m_speed = 5;
 	//斜め移動時の処理のために、一度別の変数を介する
 	float xplus = 0, yplus = 0;
 	//移動処理 枠外に出るような移動は行わない
-	if (KeybordGet(keyP[playerNum][0]) > 0 &&
-		x > (playerNum == 0 ? FRAME_SIZE_X : POSX_LIMMIT_P2) + PLAYER_SIZE) // 左
-		xplus -= speed;
-	if (KeybordGet(keyP[playerNum][1]) > 0 &&
-		x < (playerNum == 0 ? POSX_LIMMIT_P1 : WINDOW_WIDE - FRAME_SIZE_X) - PLAYER_SIZE)   // 右
-		xplus += speed;
-	if (KeybordGet(keyP[playerNum][2]) > 0 && y > FRAME_SIZE_Y + PLAYER_SIZE)  // 上
-		yplus -= speed;
-	if (KeybordGet(keyP[playerNum][3]) > 0 && y < WINDOW_HEIGHT - FRAME_SIZE_Y - PLAYER_SIZE)  // 下
-		yplus += speed;
+	if (KeybordGet(keyP[m_playerNum][0]) > 0 &&
+		m_x > (m_playerNum == 0 ? FRAME_SIZE_X : POSX_LIMMIT_P2) + PLAYER_SIZE) // 左
+		xplus -= m_speed;
+	if (KeybordGet(keyP[m_playerNum][1]) > 0 &&
+		m_x < (m_playerNum == 0 ? POSX_LIMMIT_P1 : WINDOW_WIDE - FRAME_SIZE_X) - PLAYER_SIZE)   // 右
+		xplus += m_speed;
+	if (KeybordGet(keyP[m_playerNum][2]) > 0 && m_y > FRAME_SIZE_Y + PLAYER_SIZE)  // 上
+		yplus -= m_speed;
+	if (KeybordGet(keyP[m_playerNum][3]) > 0 && m_y < WINDOW_HEIGHT - FRAME_SIZE_Y - PLAYER_SIZE)  // 下
+		yplus += m_speed;
 	//xとy方向両方に移動するとき、斜め移動の違和感をなくすため少し減速する
 	//値は1/ルート2の近似値
 	if (xplus != 0 && yplus != 0) {
 		xplus *= 0.707f;
 		yplus *= 0.707f;
 	}
-	x += xplus;
-	y += yplus;
+	m_x += xplus;
+	m_y += yplus;
 
 	if (KeybordGet(KEY_INPUT_ESCAPE) > 0) 	//Escでメニューに戻る
 		SetScene(eMenu);
 
-	FunnelAngle += 0.05;//ファンネルを回す
+	m_funnelAngle += 0.05;//ファンネルを回す
+
+	if (m_invincibleTime > 0) m_invincibleTime--;
+
+	if (m_invincibleTime > 0 && m_invincibleTime%FRASH_INTERVAL < FRASH_INTERVAL / 2) {
+		m_isDraw = false;
+	}
+	else m_isDraw = true;
 }
 
 void Player::Draw() {
-	DrawRotaGraphF(x, y, 0.4, 0, Image[playerNum], TRUE);
-	DrawRotaGraphF(x, y, 1, FunnelAngle, Image[playerNum+2], TRUE);
+	if (m_isDraw) {
+		DrawRotaGraphF(m_x, m_y, 0.4, 0, image[m_playerNum], TRUE);
+		DrawRotaGraphF(m_x, m_y, 1, m_funnelAngle, image[m_playerNum + 2], TRUE);
+	}
 }
 
+//武器を発射するメソッド
 void Player::WeaponPlus(std::vector<Weapon> &weapon) {
 	//2pの時だけカウントする
-	Wtime += playerNum;
+	shotCount += m_playerNum;
 
-	if (Wtime % 10 == 0) {
-		weapon.push_back(Weapon(x, y, playerNum));
+	if (shotCount % 10 == 0) {
+		weapon.push_back(Weapon(m_x, m_y, m_playerNum));
 	}
+}
+
+//被弾時の無敵時間を追加するメソッド
+void Player::InvTimePlus() {
+	m_invincibleTime = INV_TIME;
 }

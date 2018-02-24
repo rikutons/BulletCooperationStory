@@ -8,12 +8,12 @@ void BulletInitialize();
 引数(8+2=)10個。または、追尾(9+2=)11個。 12.弾の色 13.弾のサイズ
 */
 class Bullet :public AutoMover {
-	int color;
-	float size;
+	int m_color;
+	float m_size;
 public:
-	Bullet(float X, float Y, int _ImageType, int Color, float Size, float Speed, float Speedrate, double Angle, double Carbdegree, double Anglerate);
-	Bullet(float X, float Y, float GoalX, float GoalY, int _ImageType, int Color, float Size, float Speed, float Speedrate, double Carbdegree, double Anglerate);
+	Bullet(float, float, int, int, float, float, float, double, double, double);
+	Bullet(float, float, float, float, int, int, float, float, float, double, double);
 	void Update() { AutoMover::Update(); };
 	void Draw();
-	void IsHit(const float cx, const float cy, const int playerNum);
+	bool IsHit(const float, const float);
 };

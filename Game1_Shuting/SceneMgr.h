@@ -11,4 +11,4 @@ enum eScene {
 
 bool SceneMgr();
 
-void SetScene(eScene next);
+void SetScene(eScene);

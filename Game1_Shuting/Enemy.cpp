@@ -4,34 +4,36 @@
 #include "Bullet.h"
 #include "BulletMode.h"
 
-static int Image[1]; //0.ボス
-
-void EnemyInitialize() {
-	Image[0] = LoadGraph("../material/picture/Enemy01.png");
+namespace {
+	int image[1]; //0.ボス
 }
 
-Enemy::Enemy(float X, float Y, int _ImageType, eBulletMode Mode,
+void EnemyInitialize() {
+	image[0] = LoadGraph("../material/picture/Enemy01.png");
+}
+
+Enemy::Enemy(float X, float Y, int ImageType, eBulletMode Mode,
 	int Score, float Speed, float Speedrate, double Angle,
-	double Carbdegree, double Anglerate, double BRotation, int BColor) :
-	AutoMover(X, Y, _ImageType, Speed, Speedrate,
+	double Carbdegree, double Anglerate, double BulletAngle, int BulletColor) :
+	AutoMover(X, Y, ImageType, Speed, Speedrate,
 		Angle, Carbdegree, Anglerate),
-	score(Score), mode(Mode), time(0), Brotation(BRotation), Bcolor(BColor) {}
+	m_score(Score), mode(Mode), m_time(0), m_bulletAngle(BulletAngle), m_bulletColor(BulletColor) {}
 
 Enemy::Enemy(float X, float Y, float GoalX, float GoalY,
-	int _ImageType, eBulletMode Mode, int Score, float Speed,
-	float Speedrate, double Carbdegree, double Anglerate, double BRotation, int BColor) :
-	AutoMover(X, Y, GoalX, GoalY, _ImageType,
+	int ImageType, eBulletMode Mode, int Score, float Speed,
+	float Speedrate, double Carbdegree, double Anglerate, double BulletAngle, int BulletColor) :
+	AutoMover(X, Y, GoalX, GoalY, ImageType,
 		Speed, Speedrate, Carbdegree, Anglerate),
-	score(Score), mode(Mode), time(0), Brotation(BRotation), Bcolor(BColor) {}
+	m_score(Score), mode(Mode), m_time(0), m_bulletAngle(BulletAngle), m_bulletColor(BulletColor) {}
 
 void Enemy::Draw() {
-	DrawRotaGraphF(x, y, 0.8, 3.14, Image[ImageType], TRUE);
+	DrawRotaGraphF(m_x, m_y, 0.8, 3.14, image[m_imageType], TRUE);
 
 }
 
 void Enemy::BulletPlus(std::vector<Bullet> &bullet, float cx, float cy) {
 	if ((int)mode < 100) {
-		BulletAdd(mode, bullet, time, x, y, cx, cy, &Brotation,&Bcolor);
+		BulletAdd(mode, bullet, m_time, m_x, m_y, cx, cy, &m_bulletAngle,&m_bulletColor);
 	}
 
 	//ここから 特殊な個体
@@ -39,14 +41,14 @@ void Enemy::BulletPlus(std::vector<Bullet> &bullet, float cx, float cy) {
 		eBulletMode NowMode;
 		switch (mode) {
 		case eBoss1:
-			if (time % 1200 < 600) NowMode = eBoss1_1;
+			if (m_time % 1200 < 600) NowMode = eBoss1_1;
 			else NowMode = eBoss1_2;
-			BulletAdd(NowMode, bullet, time, x, y, cx, cy, &Brotation, &Bcolor);
+			BulletAdd(NowMode, bullet, m_time, m_x, m_y, cx, cy, &m_bulletAngle, &m_bulletColor);
 			break;
 		case eMulti1:
-			BulletAdd(eSpiral8, bullet, time, x, y, cx, cy, &Brotation, &Bcolor);
+			BulletAdd(eSpiral8, bullet, m_time, m_x, m_y, cx, cy, &m_bulletAngle, &m_bulletColor);
 			break;
 		}
 	}
-	time++;
+	m_time++;
 }

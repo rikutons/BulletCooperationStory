@@ -13,12 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="ヘッダー ファイル\GameMode">
-      <UniqueIdentifier>{eed2dfc5-3d39-4c3f-87ff-a9f98f09ac26}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\GameMode\MoveObject">
-      <UniqueIdentifier>{43acacfb-dc04-4ebb-bfca-4ff42429bf97}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\GameScene">
       <UniqueIdentifier>{e6e27e06-35de-4dd5-b0ac-e43f5f4e83a4}</UniqueIdentifier>
     </Filter>
@@ -36,6 +30,12 @@
     </Filter>
     <Filter Include="ヘッダー ファイル\GameOverScene">
       <UniqueIdentifier>{b6b55767-34cd-4aa7-8afa-49e0f8481f44}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\GameScene">
+      <UniqueIdentifier>{eed2dfc5-3d39-4c3f-87ff-a9f98f09ac26}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\GameScene\MoveObject">
+      <UniqueIdentifier>{43acacfb-dc04-4ebb-bfca-4ff42429bf97}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -99,31 +99,31 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Mover.h">
-      <Filter>ヘッダー ファイル\GameMode\MoveObject</Filter>
+      <Filter>ヘッダー ファイル\GameScene\MoveObject</Filter>
     </ClInclude>
     <ClInclude Include="Bullet.h">
-      <Filter>ヘッダー ファイル\GameMode\MoveObject</Filter>
+      <Filter>ヘッダー ファイル\GameScene\MoveObject</Filter>
     </ClInclude>
     <ClInclude Include="BulletMode.h">
-      <Filter>ヘッダー ファイル\GameMode\MoveObject</Filter>
+      <Filter>ヘッダー ファイル\GameScene\MoveObject</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
-      <Filter>ヘッダー ファイル\GameMode\MoveObject</Filter>
+      <Filter>ヘッダー ファイル\GameScene\MoveObject</Filter>
     </ClInclude>
     <ClInclude Include="Enemy.h">
-      <Filter>ヘッダー ファイル\GameMode\MoveObject</Filter>
+      <Filter>ヘッダー ファイル\GameScene\MoveObject</Filter>
     </ClInclude>
     <ClInclude Include="GameSystem.h">
-      <Filter>ヘッダー ファイル\GameMode</Filter>
+      <Filter>ヘッダー ファイル\GameScene</Filter>
     </ClInclude>
     <ClInclude Include="EnemyAdd.h">
-      <Filter>ヘッダー ファイル\GameMode\MoveObject</Filter>
+      <Filter>ヘッダー ファイル\GameScene\MoveObject</Filter>
     </ClInclude>
     <ClInclude Include="Weapon.h">
-      <Filter>ヘッダー ファイル\GameMode\MoveObject</Filter>
+      <Filter>ヘッダー ファイル\GameScene\MoveObject</Filter>
     </ClInclude>
     <ClInclude Include="GameScene.h">
-      <Filter>ヘッダー ファイル\GameMode</Filter>
+      <Filter>ヘッダー ファイル\GameScene</Filter>
     </ClInclude>
     <ClInclude Include="MenuScene.h">
       <Filter>ヘッダー ファイル\MenuScene</Filter>

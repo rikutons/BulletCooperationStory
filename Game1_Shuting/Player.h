@@ -10,15 +10,18 @@ void PlayerInitialize();
 ˆø”‚Í(4+0)‚ÂB
 */
 class Player :public Mover {
-	double FunnelAngle;
-	int playerNum;
+	double m_funnelAngle;
+	int m_playerNum;
+	int m_invincibleTime;
+	bool m_isDraw; //•`‰æ‚·‚é‚©‚Ç‚¤‚© “_–Å—p
 public:
 	Player();
-	Player(float X, float Y, int PlayerNum);
+	Player(float, float, int);
 	void Update();
 	void Draw();
-	void WeaponPlus(std::vector<Weapon> &Weapon);
-
-	float GetX() { return x; }
-	float GetY() { return y; }
+	void WeaponPlus(std::vector<Weapon>&);
+	void InvTimePlus();
+	int GetInvTime() { return m_invincibleTime; }
+	float GetX() { return m_x; }
+	float GetY() { return m_y; }
 };

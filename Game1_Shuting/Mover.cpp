@@ -7,22 +7,22 @@
 
 //60分法で得た角度をラジアンに変換
 Mover::Mover(float X, float Y, float Speed, double Angle)
-	:x(X), y(Y), speed(Speed), angle(Angle / 180 * PI), alive(true) {}
+	:m_x(X), m_y(Y), m_speed(Speed), m_angle(Angle / 180 * PI), m_alive(true) {}
 
 //-------------------------------------------------------------------------------------------------Z
 //AutoMover
 
 //60分法で得た曲がり具合、角度加速度をラジアンに変換
-AutoMover::AutoMover(float X, float Y, int _ImageType, float Speed,
+AutoMover::AutoMover(float X, float Y, int ImageType, float Speed,
 	float Speedrate, double Angle, double Carbdegree, double Anglerate) :
-	Mover(X, Y, Speed, Angle), ImageType(_ImageType), speedrate(Speedrate),
-	carbdegree(Carbdegree / 180 * PI), anglerate(Anglerate / 180 * PI), angleplus(0) {}
+	Mover(X, Y, Speed, Angle), m_imageType(ImageType), m_speedRate(Speedrate),
+	m_carbDegree(Carbdegree / 180 * PI), m_angleRate(Anglerate / 180 * PI), m_anglePlus(0) {}
 
 //goalx,goalyからangleを計算する。初期化時は仮に0を入れておく。
-AutoMover::AutoMover(float X, float Y, float GoalX, float GoalY, int _ImageType,
+AutoMover::AutoMover(float X, float Y, float GoalX, float GoalY, int ImageType,
 	float Speed, float Speedrate, double Carbdegree, double Anglerate) :
-	Mover(X, Y, Speed, 0), ImageType(_ImageType), speedrate(Speedrate),
-	carbdegree(Carbdegree / 180 * PI), anglerate(Anglerate / 180 * PI), angleplus(0) {
+	Mover(X, Y, Speed, 0), m_imageType(ImageType), m_speedRate(Speedrate),
+	m_carbDegree(Carbdegree / 180 * PI), m_angleRate(Anglerate / 180 * PI), m_anglePlus(0) {
 
 	float diffx, diffy;
 	diffx = GoalX - X;
@@ -32,23 +32,23 @@ AutoMover::AutoMover(float X, float Y, float GoalX, float GoalY, int _ImageType,
 	atan2...二点の座標から直角三角形を考え、
 	その角の大きさを返してくれる関数。(ライブラリ:cmath)
 	*/
-	angle = atan2(diffy, diffx);
+	m_angle = atan2(diffy, diffx);
 }
 
 void AutoMover::Update() {
-	speed += speedrate;
-	angleplus += anglerate*speed;
-	angle += (carbdegree + angleplus)*speed;
+	m_speed += m_speedRate;
+	m_anglePlus += m_angleRate*m_speed;
+	m_angle += (m_carbDegree + m_anglePlus)*m_speed;
 	//angle += carbdegree+angleplus;
 	//北方向を0度として計算したいので、yは-cos,xはsin,と入れ替えて使用する。
-	x += (float)sin(angle)*speed;
-	y += -(float)cos(angle)*speed;
+	m_x += (float)sin(m_angle)*m_speed;
+	m_y += -(float)cos(m_angle)*m_speed;
 
 	/*
 	画面外に行ったものを削除するため、もし画面外に出たならalive=falseにする。
 	尚、不自然にものが消えてしまうことを防ぐため、
 	ものが消える範囲を実際のウインドウサイズより多少大きくしてある。
 	*/
-	if (x > WINDOW_WIDE  *1.2 || x < WINDOW_WIDE  *-0.2 ||
-		y > WINDOW_HEIGHT*1.2 || y < WINDOW_HEIGHT*-0.2) alive = false;
+	if (m_x > WINDOW_WIDE  *1.2 || m_x < WINDOW_WIDE  *-0.2 ||
+		m_y > WINDOW_HEIGHT*1.2 || m_y < WINDOW_HEIGHT*-0.2) m_alive = false;
 }
