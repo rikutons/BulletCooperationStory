@@ -14,21 +14,23 @@ void EnemyInitialize();
 */
 class Enemy :public AutoMover {
 	int m_score;
-	int m_time;
-	eBulletMode mode;
+	int m_life;
+	int m_frameCount;
+	eBulletMode m_mode;
 	//î≠éÀÇ∑ÇÈíeÇÃêFÇï€ä«Ç∑ÇÈ
 	double m_bulletAngle;
 	int m_bulletColor;
 public:
 	Enemy(float, float, int, eBulletMode,
-		int, float, float, double,
+		int, int, float, float, double,
 		double, double, double, int);
 	Enemy(float, float, float, float,
-		int, eBulletMode, int,
+		int, eBulletMode, int, int,
 		float, float, double,
 		double, double, int);
 	void Update() { AutoMover::Update(); };
 	void Draw();
 	void BulletPlus(std::vector<Bullet>&, float, float);
+	bool IsHit(float, float, int);
 };
 

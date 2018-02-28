@@ -8,6 +8,9 @@
 
 //-----------------------------------------------------------------------------
 //定数
+//弾を打つ間隔
+#define SHOT_INTERVAL 5
+
 //無敵時間のフレーム数
 #define INV_TIME 180
 
@@ -98,8 +101,9 @@ void Player::WeaponPlus(std::vector<Weapon> &weapon) {
 	//2pの時だけカウントする
 	shotCount += m_playerNum;
 
-	if (shotCount % 10 == 0) {
-		weapon.push_back(Weapon(m_x, m_y, m_playerNum));
+	if (shotCount % SHOT_INTERVAL == 0) {
+		weapon.push_back(Weapon(m_x-10, m_y, m_playerNum));
+		weapon.push_back(Weapon(m_x+10, m_y, m_playerNum));
 	}
 }
 
