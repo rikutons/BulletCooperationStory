@@ -75,6 +75,11 @@ void Game::Update() {
 		enemyTask[i].Update();
 		//プレイヤーのx座標、y座標を使って弾を発射する
 		enemyTask[i].BulletPlus(bulletTask, playerTask[0].GetX(), playerTask[0].GetY());
+		/*for (auto &j : weaponTask) {
+			if (enemyTask[i].IsHit(j.GetX(), j.GetY(),j.GetWeaponNum())) {
+				j.SetAlive(false);
+			}
+		}*/
 		if (enemyTask[i].GetAlive() == false) {
 			enemyTask.erase(enemyTask.begin() + i);
 			i--; size--;
