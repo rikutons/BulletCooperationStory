@@ -16,4 +16,6 @@ public:
 
 	float GetX() { return m_x; }
 	float GetY() { return m_y; }
+	int GetWeaponNum() { return m_weaponNum; }
+	void SetAlive(bool Alive) { m_alive = Alive; }
 };

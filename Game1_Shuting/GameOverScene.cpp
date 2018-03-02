@@ -5,6 +5,7 @@
 #include "MenuScene.h"
 #include "Common.h"
 #include "MyDxlib.h"
+#include "SoundMgr.h"
 
 //-----------------------------------------------------------------------------
 //定数
@@ -15,7 +16,6 @@
 
 namespace {
 	int menuPoint;
-	int SE_Select, SE_Decision;
 	int F_Meiryo30;
 	int F_Meiryo70;
 	int gameOverTextX;
@@ -25,8 +25,6 @@ namespace {
 
 GameOver::GameOver() {
 	menuPoint = 0;
-	SE_Select = LoadSoundMem("../material/se/選択音.ogg");
-	SE_Decision = LoadSoundMem("../material/se/決定音.ogg");
 
 	//"メイリオ"  の70pt(30pt),太さ3のフォントを作成
 	F_Meiryo30 = CreateFontToHandle(
@@ -49,18 +47,18 @@ void GameOver::Update() {
 	if (CursorCheck(KeybordGet(KEY_INPUT_DOWN)) ||
 		CursorCheck(KeybordGet(KEY_INPUT_S))) {
 		menuPoint = (menuPoint + 1) % ITEM_NUM;
-		PlaySoundMem(SE_Select, DX_PLAYTYPE_BACK);
+		PlaySE(0);
 	}
 
 	// 上キーかWキーが押されていたら上にカーソルを移動する
 	if (CursorCheck(KeybordGet(KEY_INPUT_UP)) ||
 		CursorCheck(KeybordGet(KEY_INPUT_W))) {
 		menuPoint = (menuPoint + 1) % ITEM_NUM;
-		PlaySoundMem(SE_Select, DX_PLAYTYPE_BACK);
+		PlaySE(0);
 	}
 
 	if (KeybordGet(KEY_INPUT_RETURN) == 1) {//エンターキーが押されたら
-		PlaySoundMem(SE_Decision, DX_PLAYTYPE_BACK);
+		PlaySE(1);
 		eScene pointScene = (menuPoint == 0 ? eGame : eMenu);
 		SetScene(pointScene); //シーンを変更する
 	}

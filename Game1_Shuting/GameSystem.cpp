@@ -20,9 +20,9 @@ void GameSystemInitialize() {
 		score[i] = 0;
 		life[i] = 3;
 	}
-
 	//"Airstrike"  ÇÃ24pt,ëæÇ≥3ÇÃÉtÉHÉìÉgÇçÏê¨
-	F_Airstrike = CreateFontToHandle("Airstrike", 22, 3, DX_FONTTYPE_ANTIALIASING_EDGE);
+	F_Airstrike = CreateFontToHandle(
+		"Airstrike", 22,3, DX_FONTTYPE_ANTIALIASING_EDGE);
 }
 
 bool GameSystemUpdate() {
@@ -34,9 +34,8 @@ bool GameSystemUpdate() {
 }
 
 void BackGroundDraw() {
-
-	DrawRotaGraph(WINDOW_WIDE / 2, WINDOW_HEIGHT / 2 + 1, 1, 0, image[0], TRUE);
-
+	DrawRotaGraph(
+		WINDOW_WIDE / 2, WINDOW_HEIGHT / 2 + 1, 1, 0, image[0], TRUE);
 }
 
 void GameSystemDraw() {
@@ -45,7 +44,8 @@ void GameSystemDraw() {
 	for (int i = 0; i < PLAYER_NUM; i++) {
 		Output = (boost::format("%dp Score:%07d Life:%d") %
 			(i + 1) % score[i] % life[i]).str();
-		DrawStringToHandle(FRAME_SIZE_X - 10 + i * 373, WINDOW_HEIGHT - FRAME_SIZE_Y + 2,
+		DrawStringToHandle(
+			FRAME_SIZE_X - 10 + i * 373, WINDOW_HEIGHT - FRAME_SIZE_Y + 2,
 			Output.c_str(), GetColor(255, 255, 255), F_Airstrike);
 	}
 	//éûä‘
@@ -57,6 +57,10 @@ void GameSystemDraw() {
 
 void LifeDown(int pNum) {
 	life[pNum]--;
+}
+
+int GetLife(int pNum) {
+	return life[pNum];
 }
 
 void AddScore(int pNum, int enemyScore) {

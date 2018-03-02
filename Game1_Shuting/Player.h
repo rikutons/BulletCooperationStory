@@ -23,5 +23,8 @@ public:
 	void InvTimePlus();
 	int GetInvTime() { return m_invincibleTime; }
 	float GetX() { return m_x; }
+	void SetX(float X) { m_x = X; }
 	float GetY() { return m_y; }
+	void SetY(float Y) { m_y = Y; }
+	void SetAlive(bool Alive) { m_alive = Alive; }
 };

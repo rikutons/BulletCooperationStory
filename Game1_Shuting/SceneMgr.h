@@ -7,6 +7,7 @@ enum eScene {
 
 	eNoneScene = 5,	//eNoneはいろいろなところで使うので、eSceneのeNoneと分かるように、Scene、とつけておく。
 	eGameOver = 6,
+	eGameClear = 7,
 };
 
 bool SceneMgr();

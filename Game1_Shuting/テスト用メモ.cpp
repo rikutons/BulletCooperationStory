@@ -3,14 +3,43 @@
 DrawFormatString(0, 0, GetColor(255,255,255), "数値1:%d", );
 DrawFormatString(0, 0, GetColor(255,255,255), "数値1:%d,数値2:%d", , );
 
-DrawFormatString(BOSS_X, 240, GetColor(255, 255, 255), "x:%f,y:%f", x, y);
+
+Enemy(
+1	float X, float Y,
+2	int ImageType, eBulletMode Mode, int Score, int Life,
+3	float Speed, float Speedrate,
+4	double Angle, double Carbdegree, double Anglerate,
+5	int BulletColor, int ShotSpeed, int AimPlayerNum,
+6	int StopFrame = 0, int StartShotFrame = 0, int EndShotFrame = INF,
+7	double StopCarbAngle=INF
+)
+
+Enemy(
+1	float X, float Y, float GoalX, float GoalY,
+2	int ImageType, eBulletMode Mode, int Score, int Life,
+3	float Speed, float Speedrate,
+4	double Angle, double Carbdegree, double Anglerate,
+5	int BulletColor, int ShotSpeed, int AimPlayerNum,
+6	int StopFrame = 0, int StartShotFrame = 0, int EndShotFrame = INF,
+7	double StopCarbAngle=INF
+)
 
 
-------------弾の動きライブラリ？--------------
-前方にランダムに放射
-if (BulletModeFlag % 1 == 0)
-bullet->push_back(new B2straight(BOSS_X,BOSS_Y, GetRand(15), 0.05, 0.f, 0.1f,GetRand(64000)/BOSS_Y.f,GetRand(38000)/BOSS_Y.f+BOSS_Y));
-----------------------------------------------
+Bullet(
+1	float X, float Y,
+2	int ImageType, int Color, float Size,
+3	float Speed, float Speedrate,
+4	double Angle, double Carbdegree, double Anglerate,
+5	int StopFrame = 0,double StopCarbAngle=INF
+)
+
+Bullet(
+1	float X, float Y, float GoalX, float GoalY,
+2	int ImageType, int Color, float Size,
+3	float Speed, float Speedrate,
+4	double Angle, double Carbdegree, double Anglerate,
+5	int StopFrame = 0,double StopCarbAngle=INF
+)
 */
 
 

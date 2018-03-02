@@ -12,7 +12,7 @@
 //当たり判定の半径
 #define P_HIT_RANGE 11 //プレイヤー
 //弾の配列 defineで配列は使えないので、constにしている。
-const int BHitRange[] = { 30,50,50,10 }; 
+const int BHitRange[] = { 30,50,50,10 };
 
 //-----------------------------------------------------------------------------
 
@@ -32,18 +32,28 @@ void BulletInitialize() {
 		16, 4, 4, 200, 200, image[3]);
 }
 
-Bullet::Bullet(float X, float Y, int ImageType, int Color,
-	float Size, float Speed, float Speedrate,
-	double Angle, double Carbdegree, double Anglerate) :
+Bullet::Bullet(
+	float X, float Y,
+	int ImageType, int Color, float Size,
+	float Speed, float Speedrate,
+	double Angle, double Carbdegree, double Anglerate,
+	//ここからデフォルト引数
+	int StopFrame, double StopCarbAngle) :
 	AutoMover(X, Y, ImageType, Speed,
-		Speedrate, Angle, Carbdegree, Anglerate),
+		Speedrate, Angle, Carbdegree, 
+		Anglerate, StopFrame, StopCarbAngle),
 	m_color(Color), m_size(Size) {}
 
-Bullet::Bullet(float X, float Y, float GoalX, float GoalY,
-	int ImageType, int Color, float Size, float Speed,
-	float Speedrate, double Carbdegree, double Anglerate) :
+Bullet::Bullet(
+	float X, float Y, float GoalX, float GoalY,
+	int ImageType, int Color, float Size,
+	float Speed, float Speedrate,
+	double Angle, double Carbdegree, double Anglerate,
+	//ここからデフォルト引数
+	int StopFrame, double StopCarbAngle) :
 	AutoMover(X, Y, GoalX, GoalY, ImageType,
-		Speed, Speedrate, Carbdegree, Anglerate),
+		Speed, Speedrate, Angle, Carbdegree, 
+		Anglerate, StopFrame, StopCarbAngle),
 	m_color(Color), m_size(Size) {}
 
 void Bullet::Draw() {

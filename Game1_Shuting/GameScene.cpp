@@ -16,11 +16,8 @@ using namespace std;
 //定数
 
 //プレイヤーの座標の初期値
-#define PLAYER1_X 200.f
-#define PLAYER1_Y 400.f
-
-#define PLAYER2_X 500.f
-#define PLAYER2_Y 400.f
+const float PlayerSpawnX[] = { 215.f,585.f };
+const float PlayerSpawnY[] = { 540.f,540.f };
 //-------------------------------------------------------------------------------------------------
 
 //プレイヤーの数は固定なので、固定長配列を使用する
@@ -31,8 +28,8 @@ vector<Bullet> bulletTask;
 
 
 Game::Game() {
-	Player p1(PLAYER1_X, PLAYER1_Y, 0);
-	Player p2(PLAYER2_X, PLAYER2_Y, 1);
+	Player p1(PlayerSpawnX[0], PlayerSpawnY[0], 0);
+	Player p2(PlayerSpawnX[1], PlayerSpawnY[1], 1);
 	playerTask[0] = p1;
 	playerTask[1] = p2;
 	PlayerInitialize();
@@ -50,8 +47,13 @@ void Game::Update() {
 	//Player
 	for (int i = 0; i < PLAYER_NUM; i++)
 	{
-		playerTask[i].Update();
-		playerTask[i].WeaponPlus(weaponTask);
+		if (GetLife(i) == -1) {
+			playerTask[i].SetAlive(false);
+		}
+		if (playerTask[i].GetAlive()) {
+			playerTask[i].Update();
+			playerTask[i].WeaponPlus(weaponTask);
+		}
 	}
 
 	//Weapon
@@ -74,11 +76,22 @@ void Game::Update() {
 	for (int i = 0; i < size; i++) {
 		enemyTask[i].Update();
 		//プレイヤーのx座標、y座標を使って弾を発射する
-		enemyTask[i].BulletPlus(bulletTask, playerTask[0].GetX(), playerTask[0].GetY());
+		int aim = enemyTask[i].GetAimP();
+		if (playerTask[0].GetAlive() == false) aim = 1;
+		if (playerTask[1].GetAlive() == false) aim = 0;
+		enemyTask[i].BulletPlus(
+			bulletTask, playerTask[aim].GetX(), playerTask[aim].GetY());
+		/*for (auto &j : weaponTask)//当たり判定
+		{
+			if (enemyTask[i].IsHit(j.GetX(), j.GetY(), j.GetWeaponNum())) {
+				j.SetAlive(false);
+			}
+		}*/
 		if (enemyTask[i].GetAlive() == false) {
 			enemyTask.erase(enemyTask.begin() + i);
 			i--; size--;
 		}
+
 	}
 	bulletTask.shrink_to_fit();
 
@@ -89,11 +102,15 @@ void Game::Update() {
 		bulletTask[i].Update();
 		for (int j = 0; j < PLAYER_NUM; j++)//当たり判定
 		{
-			if (playerTask[j].GetInvTime() != 0) continue;
-			if (bulletTask[i].IsHit(playerTask[j].GetX(), playerTask[j].GetY())) {
+			if (playerTask[j].GetInvTime() != 0 ||
+				playerTask[j].GetAlive() == false) continue;
+			/*if (bulletTask[i].IsHit(
+				playerTask[j].GetX(), playerTask[j].GetY())) {
 				LifeDown(j);
 				playerTask[j].InvTimePlus();
-			}
+				playerTask[j].SetX(PlayerSpawnX[j]);
+				playerTask[j].SetY(PlayerSpawnY[j]);
+			}*/
 		}
 		if (bulletTask[i].GetAlive() == false) {
 			bulletTask.erase(bulletTask.begin() + i);
@@ -117,16 +134,16 @@ void Game::Draw() {
 	//Player
 	for (int i = 0; i < PLAYER_NUM; i++) playerTask[i].Draw();
 
-	//Bullet
+	//Weapon
 	for (auto i : weaponTask) i.Draw();
-
-	//Bullet
-	SetDrawBlendMode(DX_BLENDMODE_ADD, 255);	//加算表示
-	for (auto i : bulletTask) i.Draw();
-	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 
 	//Enemy
 	for (auto i : enemyTask) i.Draw();
+
+	//Bullet
+	SetDrawBlendMode(DX_BLENDMODE_ADD, 255);
+	for (auto i : bulletTask) i.Draw();
+	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 
 	//System
 	GameSystemDraw();
@@ -138,9 +155,9 @@ Game::~Game() {
 	//Weapon
 	vector<Weapon>().swap(weaponTask);
 
-	//Enemy
-	vector<Enemy>().swap(enemyTask);
-
 	//Bullet
 	vector<Bullet>().swap(bulletTask);
+
+	//Enemy
+	vector<Enemy>().swap(enemyTask);
 }

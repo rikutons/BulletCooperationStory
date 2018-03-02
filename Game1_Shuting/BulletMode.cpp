@@ -6,92 +6,124 @@
 using namespace std;
 //-----------------------------------------------------------------------------
 //定数
-#define BOSS1SPEED 2
-
+#define B0SIZE 0.1f
+#define B0BIGSIZE 0.2f
 //-----------------------------------------------------------------------------
 
 /*
-Bullet(float X, float Y, int _ImageType, int Color,
-	float Size, float Speed, float Speedrate,
-	double FirstAngle, double Carbdegree, double Anglerate) :
+Spiral 渦巻き
+Straight 一方向集中
+Laser レーザー
 
-Bullet(float X, float Y, float GoalX, float GoalY,
-	int _ImageType, int Color, float Size, float Speed,
-	float Speedrate, double Carbdegree, double Anglerate) :
-*/
+最後の英語、数字の意味
+R.ランダム
+P.プレイヤー座標準拠
+D.二層 T.三層
+A.加速型
+B.ビッグサイズ
+数字.一度に発車する球数
 
-/*
-eSpiral 渦巻き型
-eLaser レーザー
-
-最後の数字は方向,Rの場合はランダム
-また、その前にPがついていたらプレイヤー座標準拠
 */
 
 void BulletAdd(eBulletMode mode, std::vector<Bullet> &bullet,
-	int time, float ex, float ey,
+	float ex, float ey,
 	float cx, float cy, double *angle, int *color) {
 	switch (mode) {
-	case eSpiral8:
-		if (time % 1 == 0) {
-			for (int i = 0; i < 8; i++) {
-				bullet.push_back(Bullet(
-					ex, ey, 0, 0,
-					0.05f, BOSS1SPEED, 0,
-					i * 45 + *angle, 0, 0
-				));
-			}
-			*angle+=5;
-		}
-		break;
-
-	case eLaserBigR:
-		if (time % 25 == 0) {
-			int type;
-			if (time % (25 * 12) == 0) {
-				*angle = GetRand(360);
-				type = 1;
-			}
-			else type = 2;
+		//途中の中括弧は折り畳み用
+	case eTest: {
+		bullet.push_back(Bullet(
+			ex, ey,
+			0, *color, B0SIZE,
+			2.f, 0.f,
+			*angle, 1 / 6.0, 0.0,
+			0, -360
+		));
+		*angle += 5;
+	}
+	case eSpiral4: {
+		for (int i = 0; i < 4; i++) {
 			bullet.push_back(Bullet(
-				ex, ey, type, *color,
-				1.f, 5.f, 0,
-				*angle, 0, -0.00
+				ex, ey,
+				0, *color, B0SIZE,
+				2.f, 0.f,
+				i * 90 + *angle, 1 / 6.0, 0.0,
+				0, -30
 			));
-			++*color;
-			if (*color == 12) *color = 0;
+			*angle += 5;
 		}
 		break;
-
-		//Boss1
+	}
+	case eSpiral8: {
+		for (int i = 0; i < 8; i++) {
+			bullet.push_back(Bullet(
+				ex, ey,
+				0, *color, B0SIZE,
+				2.f, 0.f,
+				i * 45 + *angle, 1 / 6.0, 0.0,
+				0, -360
+			));
+			*angle += 5;
+		}
+		break;
+	}
+	case eStraightPB1: {
+		bullet.push_back(Bullet(
+			ex, ey, cx, cy,
+			0, *color, B0BIGSIZE,
+			20.f, 0.f,
+			0, 0.0, 0.0
+		));
+		break;
+	}
+	case eStraightP3: {
+		for (int i = 0; i < 3; i++)
+		{
+			bullet.push_back(Bullet(
+				ex, ey, cx, cy,
+				0, *color, B0SIZE,
+				1.0f, 0.025f,
+				(i - 1) * 30, 0.0, 0.0
+			));
+		}
+		break;
+	}
+	case eStraightPDA9: {
+		for (int i = 0; i < 9; i++)
+		{
+			bullet.push_back(Bullet(
+				ex, ey, cx, cy,
+				0, *color, B0SIZE,
+				1.0f, 0.16f,
+				(i - 4) * 20, 0.0, 0.0
+			));
+			bullet.push_back(Bullet(
+				ex, ey, cx, cy,
+				0, *color, B0SIZE,
+				0.5f, 0.1f,
+				(i - 4) * 20, 0.0, 0.0
+			));
+		}
+		break;
+	}
+	case eStraightFallR: {
+		int roop = GetRand(3);//一度に生成する弾数
+		for (int i = 0; i < roop; i++)
+		{
+			int lo_angle = GetRand(360);
+			double carbDegree = (180 - lo_angle) / 540.0;
+			double angleRate = carbDegree / -900;
+			bullet.push_back(Bullet(
+				ex, ey,
+				0, GetRand(11), B0SIZE,
+				0.4f, 0.16f,
+				lo_angle, carbDegree, angleRate,
+				0, 180
+			));
+		}
+		break;
+	}
+						 //Boss1
 	case eBoss1_1:
-		if (time % 40 == 0) {
-			for (int i = 0; i < 6; i++) {
-				bullet.push_back(Bullet(
-					ex, ey, 0, 0,
-					0.2f, BOSS1SPEED, 0,
-					*angle + i * 60, 0.001, 0.f
-				));
-			}
-		}
-		if (time % 10 == 0)
-			bullet.push_back(Bullet(
-				ex, ey, cx, cy,
-				0, 5, 0.1f, 1,
-				0.1f, 0, 0.f
-			));
-		*angle += 0.3;
 		break;
-
-	case eBoss1_2:
-		if (time % 3 == 0)
-			bullet.push_back(Bullet(
-				ex, ey, cx, cy,
-				0, 0, 0.3f,
-				1, 0, 1200.f, 0.f
-			));
-		break;
-
-
 	}
 };

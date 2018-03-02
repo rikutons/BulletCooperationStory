@@ -4,6 +4,12 @@
 #include "Bullet.h"
 #include "BulletMode.h"
 
+//-----------------------------------------------------------------------------
+//íËêî
+//ñ≥å¿ëÂ
+#define INF 100000000
+
+//-----------------------------------------------------------------------------
 void EnemyInitialize();
 
 /*
@@ -16,21 +22,31 @@ class Enemy :public AutoMover {
 	int m_score;
 	int m_life;
 	int m_frameCount;
+	int m_shotSpeed;
 	eBulletMode m_mode;
 	//î≠éÀÇ∑ÇÈíeÇÃêFÇï€ä«Ç∑ÇÈ
-	double m_bulletAngle;
 	int m_bulletColor;
+	double m_bulletAngle;
+	int m_aimPlayerNum;
+	int m_endShotFrame;
 public:
 	Enemy(float, float, int, eBulletMode,
 		int, int, float, float, double,
-		double, double, double, int);
+		double, double,
+		int, int, int,
+		int StopFrame = 0, int StartShotFrame = 0, int EndShotFrame = INF,
+		double StopCarbAngle = INF);
 	Enemy(float, float, float, float,
 		int, eBulletMode, int, int,
 		float, float, double,
-		double, double, int);
+		double, double,
+		int, int, int,
+		int StopFrame = 0, int StartShotFrame = 0, int EndShotFrame = INF,
+		double StopCarbAngle = INF);
 	void Update() { AutoMover::Update(); };
 	void Draw();
 	void BulletPlus(std::vector<Bullet>&, float, float);
 	bool IsHit(float, float, int);
+	int GetAimP() { return m_aimPlayerNum; }
 };
 

@@ -31,10 +31,15 @@ protected:
 	float m_speedRate;
 	double m_carbDegree;
 	double m_angleRate, m_anglePlus;
-public:
-	AutoMover(float, float, int, float, float, double, double, double);	//ŒÅ’è’e
+	int m_stopFrame, m_stopFrameCount;
+	double m_stopCarbAngle;
 
-	AutoMover(float, float, float, float, int, float, float, double, double);
-	//•Ï‰»‚·‚éÀ•W‚ÉˆË‘¶‚·‚é’e
+public:
+	AutoMover(float, float, int,
+		float, float, double, double, double, int, double);
+
+	AutoMover(float, float, float, float, int,
+		float, float, double, double, double, int, double);
+
 	void Update();
 };

@@ -3,6 +3,8 @@
 #include "MenuScene.h"
 #include "GameScene.h"
 #include "GameOverScene.h"
+#include "GameClearScene.h"
+#include "SoundMgr.h"
 
 BaseScene *scene;
 
@@ -17,9 +19,11 @@ bool SceneMgr()
 		delete scene;
 		switch (nowScene) {
 		case eMenu:
+			ChangeBGM(0);
 			scene = new Menu();
 			break;
 		case eGame:
+			ChangeBGM(1);
 			scene = new Game();
 			break;
 		case eEnd:
@@ -27,6 +31,9 @@ bool SceneMgr()
 			break;
 		case eGameOver:
 			scene = new GameOver();
+			break;
+		case eGameClear:
+			scene = new GameClear();
 			break;
 		default:
 			break;

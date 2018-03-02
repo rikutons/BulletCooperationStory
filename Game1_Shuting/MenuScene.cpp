@@ -1,18 +1,18 @@
-#include "dxlib.h"
+#include "Dxlib.h"
 #include "Keybord.h"
 #include "SceneMgr.h"
 #include "MenuScene.h"
+#include "SoundMgr.h"
 
-//-----------------------------------------------------
+//---------------------------------------------------------
 //定数
 //メニューの項目数
 #define ITEM_NUM 5
 
-//----------------------------------------------------
+//---------------------------------------------------------
 
 namespace {
 	int menuPoint;
-	int SE_Select, SE_Decision;
 	int F_Meiryo;
 	int MV_BackGround;
 	MenuDeta menu[ITEM_NUM];
@@ -21,8 +21,6 @@ namespace {
 Menu::Menu() {
 	menuPoint = 0;
 	
-	SE_Select = LoadSoundMem("../material/se/選択音.ogg");
-	SE_Decision = LoadSoundMem("../material/se/決定音.ogg");
 	MV_BackGround = LoadGraph("../material/picture/menuBackGround.mp4");
 	
 	F_Meiryo = CreateFontToHandle("メイリオ", 30, 3, DX_FONTTYPE_ANTIALIASING_EDGE);
@@ -44,25 +42,24 @@ void Menu::Update() {
 	if (CursorCheck(KeybordGet(KEY_INPUT_DOWN)) ||
 		CursorCheck(KeybordGet(KEY_INPUT_S))) { 
 		menuPoint = (menuPoint + 1) % ITEM_NUM;
-		PlaySoundMem(SE_Select, DX_PLAYTYPE_BACK);
+		PlaySE(0);
 	}
 
 	// 上キーかWキーが押されていたら上にカーソルを移動する
 	if (CursorCheck(KeybordGet(KEY_INPUT_UP)) ||
 		CursorCheck(KeybordGet(KEY_INPUT_W))) { 
 		menuPoint = (menuPoint + 4) % ITEM_NUM;
-		PlaySoundMem(SE_Select, DX_PLAYTYPE_BACK);
+		PlaySE(0);
 	}
 
 	if (KeybordGet(KEY_INPUT_RETURN) == 1) {//エンターキーが押されたら
-		PlaySoundMem(SE_Decision, DX_PLAYTYPE_BACK);
-
+		PlaySE(1);
 		if (menuPoint != 0 && menuPoint != 4) {
 			strcpy_s(menu[menuPoint].MenuName, "未実装です。終了します。");
 			menuPoint = 4;
 		}
-
-		eScene pointScene = static_cast<eScene>(menuPoint);	//int型のmenuPointをeScene型のpointSceneに明示的に変換
+		//int型のmenuPointをeScene型のpointSceneに明示的に変換
+		eScene pointScene = static_cast<eScene>(menuPoint);
 		SetScene(pointScene);
 	}
 }

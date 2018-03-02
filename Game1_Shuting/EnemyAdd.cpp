@@ -12,37 +12,58 @@
 #define BOSS_Y 100.f
 
 //----------------------------------------------------
-
-int faze;
-int addCount;
+namespace {
+	int faze;
+	int addCnt;
+}
 
 void EnemyAddInitialize() {
 	faze = 0;
-	addCount = 0;
+	addCnt = 0;
 }
 
 /*
-Enemy(float X, float Y, int ImageType, eBulletMode Mode,
-	int Score, int Life, float Speed, float Speedrate, double Angle,
-	double Carbdegree, double Anglerate, double BulletAngle, int BulletColor) :
+	Enemy(
+	float X, float Y, int ImageType, eBulletMode Mode,
+	int Score, int Life, float Speed, float Speedrate,
+	double Angle,double Carbdegree, double Anglerate,
+	double BulletAngle,int BulletColor, int ShotSpeed )
 
-Enemy(float X, float Y, float GoalX, float GoalY,
+	Enemy(
+	float X, float Y, float GoalX, float GoalY,
 	int ImageType, eBulletMode Mode, int Score, int Life,
 	float Speed, float Speedrate, double Carbdegree,
-	double Anglerate, double BulletAngle, int BulletColor) :
+	double Anglerate, double BulletAngle,
+	int BulletColor, int ShotSpeed )
 */
 
 void EnemyAdd(std::vector<Enemy> &enemy) {
-	addCount++;
+	addCnt++;
 	switch (faze) {
+	//debug faze
 	case 0:
-		if (addCount == 10) {
+		if (addCnt % 10 == 0 && addCnt <= 10) {
 			enemy.push_back(Enemy(
-				BOSS_X, BOSS_Y, 0, eMulti1,
-				50000, 30, 0, 0, 0.0,
-				0, 0.0, 0, 0)
-			);
+				600, 100,
+				0, eTest, 50000, 30,
+				0, 0,
+				240, 0, 0.0,
+				0, 30, 0
+			));
 		}
+		break;
+	case 1:
+		if (addCnt % 10 == 0 && addCnt <= 100) {
+			enemy.push_back(Enemy(
+				900, -100,
+				0, eStraightPDA9, 50000, 30,
+				5 + addCnt / 20.f, -0.05f,
+				240, 0, 0.0,
+				0, 1, 0,
+				60, 200 + addCnt
+			));
+		}
+
 		break;
 	}
 }

@@ -7,12 +7,12 @@ dxlibを使ったシューティングゲーム。
 #include "SceneMgr.h"
 #include "Keybord.h"
 #include "Common.h"	//定数を共有するヘッダファイル(ウインドウサイズ、円周率など)
-
+#include "SoundMgr.h"
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	//----------------------------------------------------------
-	//初期化処理
+	//DXlibの初期化処理
 	ChangeWindowMode(TRUE),  //フルスクリーンモードの解除
 		SetDrawScreen(DX_SCREEN_BACK),  //裏画面処理の準備
 		SetSysCommandOffFlag(1),  //altポーズを使えなくする
@@ -22,7 +22,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		SetGraphMode(WINDOW_WIDE, WINDOW_HEIGHT, 32);
 	DxLib_Init();
 	//----------------------------------------------------------
-
+	SoundMgrInitialize();
+	
 	bool isEnd = false;
 
 	while (ScreenFlip() == 0 && ProcessMessage() == 0
@@ -31,6 +32,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		isEnd = SceneMgr();
 
 	}
+	
+	SoundMgrFinalize();
 
 	DxLib_End();
 	return 0;

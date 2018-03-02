@@ -19,23 +19,17 @@
     <Filter Include="ソース ファイル\GameScene\MoveObject">
       <UniqueIdentifier>{f5e37a80-3854-4684-a4c3-b764d7b8b273}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\MenuScene">
-      <UniqueIdentifier>{e8a82649-e60e-4563-864d-4c4fb16cfb7e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\MenuScene">
-      <UniqueIdentifier>{b8eed8a4-fe98-4af1-ac5c-c07864647576}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\GameOverScene">
-      <UniqueIdentifier>{6efba235-39f9-47b4-b782-b74bb36741b1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\GameOverScene">
-      <UniqueIdentifier>{b6b55767-34cd-4aa7-8afa-49e0f8481f44}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ヘッダー ファイル\GameScene">
       <UniqueIdentifier>{eed2dfc5-3d39-4c3f-87ff-a9f98f09ac26}</UniqueIdentifier>
     </Filter>
     <Filter Include="ヘッダー ファイル\GameScene\MoveObject">
       <UniqueIdentifier>{43acacfb-dc04-4ebb-bfca-4ff42429bf97}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\OtherScene">
+      <UniqueIdentifier>{20fca4c4-23ce-4c8a-b9d0-447aa017ab0b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\OtherScene">
+      <UniqueIdentifier>{5f222e26-58cf-4bd2-acdc-cc165765b084}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -57,20 +51,11 @@
     <ClCompile Include="Bullet.cpp">
       <Filter>ソース ファイル\GameScene\MoveObject</Filter>
     </ClCompile>
-    <ClCompile Include="BulletMode.cpp">
-      <Filter>ソース ファイル\GameScene\MoveObject</Filter>
-    </ClCompile>
     <ClCompile Include="Player.cpp">
-      <Filter>ソース ファイル\GameScene\MoveObject</Filter>
-    </ClCompile>
-    <ClCompile Include="Enemy.cpp">
       <Filter>ソース ファイル\GameScene\MoveObject</Filter>
     </ClCompile>
     <ClCompile Include="GameSystem.cpp">
       <Filter>ソース ファイル\GameScene</Filter>
-    </ClCompile>
-    <ClCompile Include="EnemyAdd.cpp">
-      <Filter>ソース ファイル\GameScene\MoveObject</Filter>
     </ClCompile>
     <ClCompile Include="Weapon.cpp">
       <Filter>ソース ファイル\GameScene\MoveObject</Filter>
@@ -78,11 +63,26 @@
     <ClCompile Include="GameScene.cpp">
       <Filter>ソース ファイル\GameScene</Filter>
     </ClCompile>
+    <ClCompile Include="BulletMode.cpp">
+      <Filter>ソース ファイル\GameScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>ソース ファイル\GameScene\MoveObject</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyAdd.cpp">
+      <Filter>ソース ファイル\GameScene</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundMgr.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
     <ClCompile Include="MenuScene.cpp">
-      <Filter>ソース ファイル\MenuScene</Filter>
+      <Filter>ソース ファイル\OtherScene</Filter>
     </ClCompile>
     <ClCompile Include="GameOverScene.cpp">
-      <Filter>ソース ファイル\GameOverScene</Filter>
+      <Filter>ソース ファイル\OtherScene</Filter>
+    </ClCompile>
+    <ClCompile Include="GameClearScene.cpp">
+      <Filter>ソース ファイル\OtherScene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -125,14 +125,20 @@
     <ClInclude Include="GameScene.h">
       <Filter>ヘッダー ファイル\GameScene</Filter>
     </ClInclude>
-    <ClInclude Include="MenuScene.h">
-      <Filter>ヘッダー ファイル\MenuScene</Filter>
-    </ClInclude>
-    <ClInclude Include="GameoverScene.h">
-      <Filter>ヘッダー ファイル\GameOverScene</Filter>
-    </ClInclude>
     <ClInclude Include="MyDxlib.h">
       <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundMgr.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="GameoverScene.h">
+      <Filter>ヘッダー ファイル\OtherScene</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuScene.h">
+      <Filter>ヘッダー ファイル\OtherScene</Filter>
+    </ClInclude>
+    <ClInclude Include="GameClearScene.h">
+      <Filter>ヘッダー ファイル\OtherScene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
