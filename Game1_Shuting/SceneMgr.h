@@ -6,10 +6,10 @@ enum eScene {
 	eEnd = 4,
 
 	eNoneScene = 5,	//eNoneはいろいろなところで使うので、eSceneのeNoneと分かるように、Scene、とつけておく。
-	eGameOver = 6,
-	eGameClear = 7,
+	eGameClear = 6,
 };
 
+void SceneMgrInitialize();
 bool SceneMgr();
 
 void SetScene(eScene);

@@ -18,18 +18,35 @@ A.â¡ë¨å^
 */
 
 enum eBulletMode {
-	eTest,
+	eT,
+
+	eNoneMode,
+	//Spiral
 	eSpiral4,
-	eSpiral8,	
+	eSpiral6,
+	eSpiral6P,
+	eSpiral8,
+	eSpiralRfP32,
+	eSpiralSPD32,
+	eSpiralRC,
+
+	//Straight
+	eStraightB1,
+	eStraightMC1,
+	eStraightP1,
 	eStraightPB1,
 	eStraightP3,
+	eStraightSlashD9,
 	eStraightPDA9,
 	eStraightFallR,
-	eBoss1 = 100,
+
+	//É{ÉX
+	eMediumBoss1=100,
+	eMediumBoss2,
+	eMediumBoss3,
+	eBoss1,
 	eBoss1_1,
-	eBoss1_2,
-	eBoss1_3,
-	eMulti1
+	eBoss1_1Object
 };
 
 void BulletAdd(eBulletMode, std::vector<Bullet>&,

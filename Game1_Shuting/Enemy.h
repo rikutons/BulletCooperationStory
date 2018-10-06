@@ -3,13 +3,8 @@
 #include "Mover.h"
 #include "Bullet.h"
 #include "BulletMode.h"
+#include "Common.h"
 
-//-----------------------------------------------------------------------------
-//’è”
-//–³ŒÀ‘å
-#define INF 100000000
-
-//-----------------------------------------------------------------------------
 void EnemyInitialize();
 
 /*
@@ -19,7 +14,7 @@ void EnemyInitialize();
 14.”­Ë‚·‚é’e‚ÌF(•Ï“®‚·‚éê‡‚ÍÅ‰‚ÌF) 15.”­Ë‚·‚é’e‚Ì”­ËŠp(60•ª–@)
 */
 class Enemy :public AutoMover {
-	int m_score;
+protected:
 	int m_life;
 	int m_frameCount;
 	int m_shotSpeed;
@@ -28,25 +23,27 @@ class Enemy :public AutoMover {
 	int m_bulletColor;
 	double m_bulletAngle;
 	int m_aimPlayerNum;
+	int m_startShotFrame;
 	int m_endShotFrame;
 public:
-	Enemy(float, float, int, eBulletMode,
-		int, int, float, float, double,
-		double, double,
-		int, int, int,
+	Enemy(float, float,
+		int, eBulletMode,
+		float, float,
+		double, double, double,
+		int, double, int, int,
 		int StopFrame = 0, int StartShotFrame = 0, int EndShotFrame = INF,
 		double StopCarbAngle = INF);
 	Enemy(float, float, float, float,
-		int, eBulletMode, int, int,
-		float, float, double,
-		double, double,
-		int, int, int,
+		int, eBulletMode,
+		float, float,
+		double, double, double,
+		int, double, int, int,
 		int StopFrame = 0, int StartShotFrame = 0, int EndShotFrame = INF,
 		double StopCarbAngle = INF);
 	void Update() { AutoMover::Update(); };
 	void Draw();
-	void BulletPlus(std::vector<Bullet>&, float, float);
-	bool IsHit(float, float, int);
+	virtual void BulletPlus(std::vector<Bullet>&, float, float);
+	virtual bool IsHit(float, float, int);
 	int GetAimP() { return m_aimPlayerNum; }
 };
 

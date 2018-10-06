@@ -3,4 +3,6 @@
 #include "Enemy.h"
 
 void EnemyAddInitialize();
-void EnemyAdd(std::vector<Enemy>&);
+void SetFaze(int);
+void EnemyAdd(std::vector<Enemy*>&);
+void SetSpecialAdd(int, double);

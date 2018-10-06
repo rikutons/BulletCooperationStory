@@ -1,9 +1,15 @@
 #pragma once
 
 void GameSystemInitialize();
-bool GameSystemUpdate();
+void GameSystemUpdate();
 void BackGroundDraw();
 void GameSystemDraw();
-void LifeDown(int);
-int GetLife(int);
+void LifeDown();
+void LifePlus();
 void AddScore(int, int);
+void ChangeBackGround();
+bool GetChangeBackGround();
+int GetGameTime();
+bool GetIsGameOver();
+bool GetIsSelectEscape();
+void SetIsSelectEscape(bool);

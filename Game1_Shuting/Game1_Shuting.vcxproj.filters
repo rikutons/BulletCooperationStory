@@ -31,6 +31,12 @@
     <Filter Include="ソース ファイル\OtherScene">
       <UniqueIdentifier>{5f222e26-58cf-4bd2-acdc-cc165765b084}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\MenuScene">
+      <UniqueIdentifier>{0fe7f841-3e13-4857-9315-4487bd7a38e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\MenuScene">
+      <UniqueIdentifier>{e5f60a47-1fe0-440e-b2c5-6e7453aa1475}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Keybord.cpp">
@@ -75,14 +81,38 @@
     <ClCompile Include="SoundMgr.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="MenuScene.cpp">
-      <Filter>ソース ファイル\OtherScene</Filter>
-    </ClCompile>
-    <ClCompile Include="GameOverScene.cpp">
-      <Filter>ソース ファイル\OtherScene</Filter>
-    </ClCompile>
     <ClCompile Include="GameClearScene.cpp">
       <Filter>ソース ファイル\OtherScene</Filter>
+    </ClCompile>
+    <ClCompile Include="EffectMgr.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Boss.cpp">
+      <Filter>ソース ファイル\GameScene\MoveObject</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseSelectScene.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="MyDxlib.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="GameOverSelect.cpp">
+      <Filter>ソース ファイル\GameScene</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuScene.cpp">
+      <Filter>ソース ファイル\MenuScene</Filter>
+    </ClCompile>
+    <ClCompile Include="FazeSelect.cpp">
+      <Filter>ソース ファイル\MenuScene</Filter>
+    </ClCompile>
+    <ClCompile Include="EscapeSelect.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="ManualSelect.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="ModeSelect.cpp">
+      <Filter>ソース ファイル\MenuScene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -131,14 +161,35 @@
     <ClInclude Include="SoundMgr.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="GameoverScene.h">
-      <Filter>ヘッダー ファイル\OtherScene</Filter>
-    </ClInclude>
-    <ClInclude Include="MenuScene.h">
-      <Filter>ヘッダー ファイル\OtherScene</Filter>
-    </ClInclude>
     <ClInclude Include="GameClearScene.h">
       <Filter>ヘッダー ファイル\OtherScene</Filter>
+    </ClInclude>
+    <ClInclude Include="EffectMgr.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Boss.h">
+      <Filter>ヘッダー ファイル\GameScene\MoveObject</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseSelectScene.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="GameOverSelect.h">
+      <Filter>ヘッダー ファイル\GameScene</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuScene.h">
+      <Filter>ヘッダー ファイル\MenuScene</Filter>
+    </ClInclude>
+    <ClInclude Include="FazeSelect.h">
+      <Filter>ヘッダー ファイル\MenuScene</Filter>
+    </ClInclude>
+    <ClInclude Include="EscapeSelect.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="ManualSelect.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="ModeSelect.h">
+      <Filter>ヘッダー ファイル\MenuScene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

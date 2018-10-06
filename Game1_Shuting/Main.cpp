@@ -1,13 +1,18 @@
 /*
-制作 居田 陸人(コーディング,画像素材),田中 海士(コーディング,画像素材),吉木 旺助(コーディング,音楽,効果音)
-dxlibを使ったシューティングゲーム。
+弾幕連携譚 v1.0
+[18/4/01追記]
+制作者,参考にしたサイト,工夫した点などの情報は,
+プロジェクトファイルより一つ上の階層の,README.txtに
+書いているので,そちらをご覧ください.
 */
 
 #include "DxLib.h"
-#include "SceneMgr.h"
 #include "Keybord.h"
-#include "Common.h"	//定数を共有するヘッダファイル(ウインドウサイズ、円周率など)
+#include "Common.h"	//定数を共有するヘッダファイル(ウインドウサイズ,円周率など)
+#include "EffectMgr.h"
+#include "SceneMgr.h"
 #include "SoundMgr.h"
+#include "BaseSelectScene.h"
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
@@ -18,12 +23,15 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		SetSysCommandOffFlag(1),  //altポーズを使えなくする
 		SetMainWindowText("弾幕連携譚"),   //ウインドウ名の指定
 		SetWindowIconID(101),  //アイコンを表示する
-							   //ウインドウサイズ、色情報の指定
+							   //ウインドウサイズ,色情報の指定
 		SetGraphMode(WINDOW_WIDE, WINDOW_HEIGHT, 32);
 	DxLib_Init();
 	//----------------------------------------------------------
-	SoundMgrInitialize();
 	
+	SceneMgrInitialize();
+	SoundMgrInitialize();
+	BaseSelectSceneInitialize();
+
 	bool isEnd = false;
 
 	while (ScreenFlip() == 0 && ProcessMessage() == 0
@@ -33,8 +41,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	}
 	
-	SoundMgrFinalize();
-
 	DxLib_End();
 	return 0;
 }

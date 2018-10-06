@@ -10,7 +10,7 @@ void WeaponInitialize();
 class Weapon :public Mover {
 	int m_weaponNum;
 public:
-	Weapon(float, float, int);
+	Weapon(float, float, int, float, double);
 	void Update();
 	void Draw();
 

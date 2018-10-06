@@ -3,13 +3,8 @@
 #include "SceneMgr.h"
 #include "Common.h"
 #include "Weapon.h"
+#include <cmath>
 
-//-----------------------------------------------------
-//定数
-//武器の速度
-#define SPEED 10
-
-//-----------------------------------------------------
 
 namespace {
 	int image[2];
@@ -21,12 +16,13 @@ void WeaponInitialize() {
 }
 
 
-Weapon::Weapon(float X, float Y,int WeaponNum) :
-	Mover(X,Y,SPEED,0),m_weaponNum(WeaponNum) {}
+Weapon::Weapon(float X, float Y, int WeaponNum, float speed, double Angle) :
+	Mover(X, Y, speed, Angle), m_weaponNum(WeaponNum) {}
 
 
 void Weapon::Update() {
-	m_y -= m_speed;
+	m_x += (float)sin(m_angle)*m_speed;
+	m_y += -(float)cos(m_angle)*m_speed;
 	/*
 	画面外に行った武器を削除するため、もし画面外に出たならalive=falseにする。
 	尚、不自然に武器が消えてしまうことを防ぐため、
@@ -37,5 +33,5 @@ void Weapon::Update() {
 }
 
 void Weapon::Draw() {
-	DrawRotaGraphF(m_x, m_y, 0.2, 0, image[m_weaponNum], TRUE);
+	DrawRotaGraphF(m_x, m_y, 0.1, m_angle, image[m_weaponNum], TRUE);
 }

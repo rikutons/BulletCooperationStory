@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -87,11 +87,11 @@
       <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\git\BulletCooperationStory\Game1_Shuting\dxlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\DxLib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>C:\git\BulletCooperationStory\Game1_Shuting\dxlib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\DxLib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -127,18 +127,26 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BaseSelectScene.cpp" />
+    <ClCompile Include="Boss.cpp" />
+    <ClCompile Include="EffectMgr.cpp" />
+    <ClCompile Include="EscapeSelect.cpp" />
+    <ClCompile Include="FazeSelect.cpp" />
     <ClCompile Include="GameClearScene.cpp" />
+    <ClCompile Include="ManualSelect.cpp" />
+    <ClCompile Include="MenuScene.cpp" />
+    <ClCompile Include="MyDxlib.cpp" />
     <ClCompile Include="SoundMgr.cpp" />
     <ClCompile Include="EnemyAdd.cpp" />
     <ClCompile Include="GameSystem.cpp" />
     <ClCompile Include="BulletMode.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Bullet.cpp" />
-    <ClCompile Include="GameOverScene.cpp" />
+    <ClCompile Include="GameOverSelect.cpp" />
     <ClCompile Include="Keybord.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="GameScene.cpp" />
-    <ClCompile Include="MenuScene.cpp" />
+    <ClCompile Include="ModeSelect.cpp" />
     <ClCompile Include="Mover.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="SceneMgr.cpp" />
@@ -146,17 +154,24 @@
     <ClCompile Include="テスト用メモ.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BaseSelectScene.h" />
+    <ClInclude Include="Boss.h" />
+    <ClInclude Include="EffectMgr.h" />
     <ClInclude Include="EnemyAdd.h" />
+    <ClInclude Include="EscapeSelect.h" />
+    <ClInclude Include="FazeSelect.h" />
     <ClInclude Include="GameClearScene.h" />
     <ClInclude Include="GameSystem.h" />
     <ClInclude Include="BulletMode.h" />
     <ClInclude Include="BaseScene.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Common.h" />
-    <ClInclude Include="GameoverScene.h" />
+    <ClInclude Include="GameOverSelect.h" />
     <ClInclude Include="Keybord.h" />
     <ClInclude Include="GameScene.h" />
+    <ClInclude Include="ManualSelect.h" />
     <ClInclude Include="MenuScene.h" />
+    <ClInclude Include="ModeSelect.h" />
     <ClInclude Include="Mover.h" />
     <ClInclude Include="MyDxlib.h" />
     <ClInclude Include="Player.h" />

@@ -1,12 +1,6 @@
 #pragma once
 #include "Mover.h"
-
-//-----------------------------------------------------------------------------
-//íËêî
-//ñ≥å¿ëÂ
-#define INF 100000000
-
-//-----------------------------------------------------------------------------
+#include "Common.h"
 
 void BulletInitialize();
 
@@ -19,9 +13,11 @@ class Bullet :public AutoMover {
 	float m_size;
 public:
 	Bullet(float, float, int, int, float, float, float,
-		double, double, double, int StopFrame = -1, double StopCarbAngle = INF);
+		double, double, double,
+		int StopFrame = 0, double StopCarbAngle = INF, int ReflectCount = 0);
 	Bullet(float, float, float, float, int, int, float, float, float,
-		double, double, double, int StopFrame = -1, double StopCarbAngle = INF);
+		double, double, double,
+		int StopFrame = 0, double StopCarbAngle = INF, int ReflectCount = 0);
 	void Update() { AutoMover::Update(); };
 	void Draw();
 	bool IsHit(const float, const float);

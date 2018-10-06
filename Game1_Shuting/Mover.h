@@ -33,13 +33,14 @@ protected:
 	double m_angleRate, m_anglePlus;
 	int m_stopFrame, m_stopFrameCount;
 	double m_stopCarbAngle;
-
+	int m_reflectCount;
+	int m_beforeReflectDir;
 public:
 	AutoMover(float, float, int,
-		float, float, double, double, double, int, double);
+		float, float, double, double, double, int, double, int);
 
 	AutoMover(float, float, float, float, int,
-		float, float, double, double, double, int, double);
+		float, float, double, double, double, int, double, int);
 
 	void Update();
 };
